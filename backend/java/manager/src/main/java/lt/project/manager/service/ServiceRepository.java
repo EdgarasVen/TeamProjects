@@ -20,7 +20,6 @@ public interface ServiceRepository {
     //Delete
     void deleteProjectByName(String name);
     void deleteTaskById(Long id);
-
     //Put
 
 }

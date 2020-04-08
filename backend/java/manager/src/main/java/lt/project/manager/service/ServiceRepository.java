@@ -21,5 +21,6 @@ public interface ServiceRepository {
     void deleteProjectByName(String name);
     void deleteTaskById(Long id);
     //Put
-
+    void updateProject(Project project, Long id);
+   	void updateTask(Task task, Long id);
 }

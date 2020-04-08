@@ -1,41 +1,39 @@
 package lt.project.manager.model;
 
-import javax.persistence.Entity;
+import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lt.project.manager.enums.Status;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
+@Data
+@Setter
+@Getter
+@NoArgsConstructor
 public class Project {
 
+    /*Sistemos pagrindiniame lange pateikiamas projektų sąrašas. Projekto sąrašas turi teikti tokią informaciją:
+    Projekto pavadinimas
+    Projekto aprašymas
+    Projekto informacija:
+        Projekto būsena: vykdomas, užbaigtas
+        Projekto bendras užduočių kiekis
+        Projekto neatliktų užduočių kiekis*/
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String name;
     private String description;
-    private String companyName;
+    private Status status;
 
-    public Project(String name, String description, String companyName) {
+    public Project(String name, String description, Status status) {
         this.name = name;
         this.description = description;
-        this.companyName = companyName;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getCompanyName() {
-        return companyName;
-    }
-
-    public void setCompanyName(String companyName) {
-        this.companyName = companyName;
+        this.status = status;
     }
 }

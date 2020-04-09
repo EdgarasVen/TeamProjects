@@ -1,6 +1,8 @@
 package lt.project.manager.controller;
 
-public class PutApi extends ApiController{
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
 
+public class PutApi extends ApiController{
 
 }

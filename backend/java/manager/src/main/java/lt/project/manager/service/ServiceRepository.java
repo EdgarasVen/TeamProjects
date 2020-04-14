@@ -16,11 +16,13 @@ public interface ServiceRepository {
 
     //Post
     void createProject(Project project);
+    void createTaskAndAssignToProject(Task task,Long id);
 
     //Delete
     void deleteProjectByName(String name);
     void deleteTaskById(Long id);
+
     //Put
     void updateProject(Project project, Long id);
-   	void updateTask(Task task, Long id);
+   	void updateTask(Task task, Long projectId);
 }

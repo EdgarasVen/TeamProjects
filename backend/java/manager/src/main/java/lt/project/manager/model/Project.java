@@ -6,20 +6,20 @@ import lt.project.manager.enums.Status;
 import javax.persistence.*;
 import java.util.*;
 
+/**
+ * Class represents Project entity and PROJECT table.
+ *
+ * @author  IT Crew
+ * @version 1.0
+ *
+ */
+
 @Data
 @Setter
 @Getter
 @NoArgsConstructor
 @Entity
 public class Project {
-
-    /*Sistemos pagrindiniame lange pateikiamas projektų sąrašas. Projekto sąrašas turi teikti tokią informaciją:
-    Projekto pavadinimas
-    Projekto aprašymas
-    Projekto informacija:
-        Projekto būsena: vykdomas, užbaigtas
-        Projekto bendras užduočių kiekis
-        Projekto neatliktų užduočių kiekis*/
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,7 +31,7 @@ public class Project {
     @OneToMany(mappedBy = "project",
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY)
-    private List<Task> taskSet = new ArrayList<>();
+    private List<Task> tasks = new ArrayList<>();
 
     public Project(String name, String description, Status status) {
         this.name = name;
@@ -39,8 +39,12 @@ public class Project {
         this.status = status;
     }
 
+    /**
+     * Method add task object to list of tasks and set this project to task
+     * @param task Object
+     */
     public void addTask(Task task){
-        taskSet.add(task);
+        tasks.add(task);
         task.setProject(this);
     }
 }

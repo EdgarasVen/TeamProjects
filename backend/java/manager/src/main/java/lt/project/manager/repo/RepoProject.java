@@ -5,6 +5,13 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.transaction.annotation.Transactional;
 
+/**
+ * JPA database interface
+ * @author  IT Crew
+ * @version 1.0
+ *
+ */
+
 public interface RepoProject extends CrudRepository<Project,Long> {
 
     @Transactional

@@ -1,0 +1,8 @@
+lt.project.manager
+lt.project.manager.controller
+lt.project.manager.enums
+lt.project.manager.exceptions
+lt.project.manager.model
+lt.project.manager.repo
+lt.project.manager.service
+lt.project.manager.transfer

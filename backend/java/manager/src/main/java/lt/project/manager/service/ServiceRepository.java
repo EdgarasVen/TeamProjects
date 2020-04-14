@@ -5,6 +5,13 @@ import lt.project.manager.model.Task;
 
 import java.util.List;
 
+/**
+ * Repository interface
+ * @author  IT Crew
+ * @version 1.0
+ *
+ */
+
 public interface ServiceRepository {
 
     //Get

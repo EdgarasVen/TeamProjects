@@ -10,6 +10,14 @@ import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.NotNull;
 
+/**
+ * Transfer object for project entity creation
+ * @see Project
+ * @author  IT Crew
+ * @version 1.0
+ *
+ */
+
 @Data
 @Setter
 @Getter
@@ -23,6 +31,10 @@ public class TransferProject {
     private String description;
     private Status status;
 
+    /**
+     * Builds from parameters Project
+     * @return project
+     */
     public Project build(){
         return new Project(
                 name,

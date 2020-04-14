@@ -10,6 +10,14 @@ import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.NotNull;
 
+/**
+ * Transfer object for Task entity creation
+ * @see Task
+ * @author  IT Crew
+ * @version 1.0
+ *
+ */
+
 @Data
 @Setter
 @Getter
@@ -20,7 +28,11 @@ public class TransferTask {
     private String name;
     private Priority priority;
     private Status status;
-	
+
+    /**
+     * Builds from parameters Task
+     * @return Task
+     */
 	public Task build() {
 		return new Task(name, priority, status);
 	}

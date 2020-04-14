@@ -11,20 +11,20 @@ import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.Date;
 
+/**
+ * Class represents Task entity and TASK table.
+ *
+ * @author  IT Crew
+ * @version 1.0
+ *
+ */
+
 @Data
 @Getter
 @Setter
 @NoArgsConstructor
 @Entity
 public class Task {
-
-    /*Užduoties ID
-    Užduoties pavadinimas
-    Užduoties aprašymas (User story formatas)
-    Užduoties prioritetas: žemas, vidutinis, aukštas
-    Užduoties būsena: padaryti, daroma, padaryta
-    Automatiškai užpildomos užduoties sukūrimo ir atnaujinimo datos.
-    */
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

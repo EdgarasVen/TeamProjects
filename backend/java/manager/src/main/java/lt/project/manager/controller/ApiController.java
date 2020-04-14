@@ -8,6 +8,7 @@ import lt.project.manager.transfer.TransferTask;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -57,24 +58,24 @@ public class ApiController {
 
     //Post
     @PostMapping("/api/project")
-    public void createNewProject(@RequestBody TransferProject project){
+    public void createNewProject(@RequestBody final @Valid TransferProject project){
         repository.createProject(project.build());
     }
 
 
     //Put
     @PutMapping("/api/project/{id}")
-    public void updateProject(@RequestBody TransferProject project,@PathVariable Long id) {
+    public void updateProject(@RequestBody final @Valid TransferProject project,@PathVariable Long id) {
         repository.updateProject(project.build(), id);
     }
 
     @PutMapping("/api/task/{id}")
-    public void updateTask(@RequestBody TransferTask task,@PathVariable Long id) {
+    public void updateTask(@RequestBody final @Valid TransferTask task,@PathVariable Long id) {
         repository.updateTask(task.build(), id);
     }
 
     @PutMapping("/api/assign/{projectId}")
-    public void addTaskToProject(@PathVariable Long projectId ,@RequestBody TransferTask task){
+    public void addTaskToProject(@PathVariable Long projectId ,@RequestBody final @Valid TransferTask task){
         repository.createTaskAndAssignToProject(task.build(), projectId);
     }
 

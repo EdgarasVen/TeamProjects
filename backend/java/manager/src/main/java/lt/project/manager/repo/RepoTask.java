@@ -6,7 +6,7 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
- * JPA database interface
+ * Crud database interface
  * @author  IT Crew
  * @version 1.0
  *

@@ -7,6 +7,12 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+/**
+ * Crud database interface
+ * @author  IT Crew
+ * @version 1.0
+ *
+ */
 
 public interface RepoProject extends CrudRepository<Project,Long> {
 

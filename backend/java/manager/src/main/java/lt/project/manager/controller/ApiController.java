@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
 
+
 /**
  *  Class represent api controller for restful application.
  *  Includes GET POST DELETE PUT methods
@@ -46,7 +47,7 @@ public class ApiController {
      * @return Project object
      */
     @GetMapping("/api/project/{name}")
-    public Project getProjectByName(@PathVariable String name){
+    public List<Project> getProjectByName(@PathVariable String name){
         return repository.getProjectByName(name);
     }
 

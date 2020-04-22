@@ -17,7 +17,7 @@ public interface ServiceRepository {
     //Get
     List<Project> getProjects();
     List<Task> getTasks();
-    Project getProjectByName(String name);
+    List<Project> getProjectByName(String name);
     Task getTaskById(Long id);
     Task getTaskByName(String name);
 

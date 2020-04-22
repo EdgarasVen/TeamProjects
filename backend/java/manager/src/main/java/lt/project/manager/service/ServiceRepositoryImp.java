@@ -52,7 +52,7 @@ public class ServiceRepositoryImp implements ServiceRepository {
      * @return project with same name
      */
     @Override
-    public Project getProjectByName(String name) {
+    public List<Project> getProjectByName(String name) {
         return projectDatabase.findByName(name);
     }
 

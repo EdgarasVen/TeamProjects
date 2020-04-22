@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 public class ApiController {
 
@@ -24,7 +25,7 @@ public class ApiController {
     }
 
     @GetMapping("/api/project/{name}")
-    public Project getProjectByName(@PathVariable String name){
+    public List<Project> getProjectByName(@PathVariable String name){
         return repository.getProjectByName(name);
     }
 

@@ -5,10 +5,12 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 public interface RepoProject extends CrudRepository<Project,Long> {
 
     @Transactional
     void deleteByName(String name);
     @Transactional
-    Project findByName(String name);
+    List<Project> findByName(String name);
 }

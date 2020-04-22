@@ -1,5 +1,6 @@
 package lt.project.manager.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import lt.project.manager.enums.Status;
 
@@ -28,6 +29,7 @@ public class Project {
     private String description;
     @Enumerated(EnumType.STRING)
     private Status status;
+    //@JsonIgnore
     @OneToMany(mappedBy = "project",
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY)

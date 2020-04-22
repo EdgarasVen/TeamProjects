@@ -66,7 +66,7 @@ public class ServiceRepositoryImp implements ServiceRepository {
      */
     @Override
     public List<Task> getTaskById(Long id) {
-        List<Task> list = (List<Task>) taskDatabase.findAll();
+        List<Task> list = taskDatabase.findAll();
         return list.stream()
                 .filter(task -> task.getId()==id)
                 .collect(Collectors.toList());
@@ -85,6 +85,19 @@ public class ServiceRepositoryImp implements ServiceRepository {
                 .filter(task -> task.getName().equals(name))
                 .collect(Collectors.toList());*/
         return taskDatabase.findByName(name);
+    }
+
+    /**
+     *
+     * @param id project id
+     * @return project with this id
+     */
+    @Override
+    public List<Project> getProjectById(Long id) {
+        List<Project> list = projectDatabase.findAll();
+        return list.stream()
+                .filter(project -> project.getId()==id)
+                .collect(Collectors.toList());
     }
 
     /**

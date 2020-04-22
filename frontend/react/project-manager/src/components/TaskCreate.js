@@ -36,7 +36,7 @@ class Header extends Component {
         <div className="container register-form">
           <div className="form">
             <div className="note">
-              <p> Create new task. </p>
+              <p> Create new task for project {this.props.id}. </p>
             </div>
 
             <div className="form-content">

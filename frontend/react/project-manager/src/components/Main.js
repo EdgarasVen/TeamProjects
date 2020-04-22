@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Sidebar from './Sidebar'
 import Projects from './Projects'
 import ProjectInfo from './ProjectInfoWrapper'
-import ProjectCreate from './ProjectCreate'
+import ProjectCreate from './ProjectCreateWrapper'
 import ProjectEdit from './ProjectEditWrapper'
 import TaskCreate from './TaskCreateWrapper'
 import Tasks from './Tasks'
@@ -41,10 +41,10 @@ class Main extends Component {
                         <Route path="/project/info/:id">
                         <ProjectInfo />    
                         </Route>
-                        <Route path="/project/edit/:name">
+                        <Route path="/project/edit/:id">
                         <ProjectEdit />    
                         </Route>
-                        <Route path="/project/add/:name">
+                        <Route path="/project/add/:id">
                         <TaskCreate />    
                         </Route>
                     </Switch>

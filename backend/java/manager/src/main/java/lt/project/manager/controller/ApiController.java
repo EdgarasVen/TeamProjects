@@ -44,10 +44,19 @@ public class ApiController {
 
     /**
      * GET api method
+     * @param id project id
+     * @return Project object
+     */
+    @GetMapping("/api/project/id/{id}")
+    public List<Project> getProjectById(@PathVariable Long id){
+        return repository.getProjectById(id);
+    }
+    /**
+     * GET api method
      * @param name project name
      * @return Project object
      */
-    @GetMapping("/api/project/{name}")
+    @GetMapping("/api/project/name/{name}")
     public List<Project> getProjectByName(@PathVariable String name){
         return repository.getProjectByName(name);
     }

@@ -18,7 +18,7 @@ class Project extends Component {
 
     componentDidMount() {
         axios
-            .get(`http://localhost:8080/api/project/${this.props.id}`)
+            .get(`http://localhost:8080/api/project/id/${this.props.id}`)
             .then(res => {
                 this.setState({ projects: res.data,
                                 isFetching: true, })
@@ -35,10 +35,10 @@ class Project extends Component {
             <div >
                 {/* Page Heading */}
                 <div className="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-                    <h1 className="h3 mb-0 text-gray-800">{this.props.name}</h1>
-                    <Link to={`/project/add/${this.props.name}`} className="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm ml-4">
+                    <h1 className="h3 mb-0 text-gray-800">{projects[0].name}</h1>
+                    <Link to={`/project/add/${this.props.id}`} className="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm ml-4">
                         <i className="fas  fa-sm text-white-50"></i> Add Task </Link>
-                    <Link to={`/project/edit/${this.props.name}`} className="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm ml-4">
+                    <Link to={`/project/edit/${this.props.id}`} className="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm ml-4">
                         <i className="fas  fa-sm text-white-50"></i> Edit </Link>
                     <Link to="" className="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm ml-4">
                         <i className="fas  fa-sm text-white-50"></i> Delete </Link>

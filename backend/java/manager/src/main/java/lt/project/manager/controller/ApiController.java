@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 
 
 /**
@@ -65,8 +66,8 @@ public class ApiController {
      * @param id task id
      * @return Task object
      */
-    @GetMapping("/api/task/{id}")
-    public Task getTaskById(@PathVariable Long id){
+    @GetMapping("/api/task/id/{id}")
+    public List<Task> getTaskById(@PathVariable Long id){
         return repository.getTaskById(id);
     }
 
@@ -75,8 +76,8 @@ public class ApiController {
      * @param name task name
      * @return Task object
      */
-    @GetMapping("/api/task/{name}")
-    public Task getTaskByName(@PathVariable String name){
+    @GetMapping("/api/task/name/{name}")
+    public List<Task> getTaskByName(@PathVariable String name){
         return repository.getTaskByName(name);
     }
 

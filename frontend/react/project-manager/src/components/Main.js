@@ -4,6 +4,7 @@ import Projects from './Projects'
 import ProjectInfo from './ProjectInfoWrapper'
 import ProjectCreate from './ProjectCreate'
 import ProjectEdit from './ProjectEditWrapper'
+import TaskCreate from './TaskCreateWrapper'
 import Tasks from './Tasks'
 
 import axios from 'axios';
@@ -37,11 +38,14 @@ class Main extends Component {
                         <Route path="/project/create">
                         <ProjectCreate />    
                         </Route>
-                        <Route path="/project/info/:name">
+                        <Route path="/project/info/:id">
                         <ProjectInfo />    
                         </Route>
                         <Route path="/project/edit/:name">
                         <ProjectEdit />    
+                        </Route>
+                        <Route path="/project/add/:name">
+                        <TaskCreate />    
                         </Route>
                     </Switch>
                     </div>               

@@ -4,6 +4,7 @@ import lt.project.manager.model.Project;
 import lt.project.manager.model.Task;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Repository interface
@@ -18,8 +19,8 @@ public interface ServiceRepository {
     List<Project> getProjects();
     List<Task> getTasks();
     List<Project> getProjectByName(String name);
-    Task getTaskById(Long id);
-    Task getTaskByName(String name);
+    List<Task> getTaskById(Long id);
+    List<Task> getTaskByName(String name);
 
     //Post
     void createProject(Project project);

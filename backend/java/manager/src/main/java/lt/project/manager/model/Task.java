@@ -28,7 +28,7 @@ import java.util.Date;
 public class Task {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String name;
     @Enumerated(EnumType.STRING)
@@ -41,6 +41,7 @@ public class Task {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "project_id")
     private Project project;
+    private String projectN;
 
     public Task(String name, Priority priority, Status status) {
         this.name = name;

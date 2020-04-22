@@ -7,16 +7,16 @@ class Header extends Component {
     super(props);
     this.state = {
       name: '',
-      description: '',
+      priority: '',
       status: ''
     }
   }
 
 
   Submit = () => {
-    axios.post(`http://localhost:8080/api/project`, {
+    axios.put(`http://localhost:8080/api/assign/${this.props.id}`, {
       name: this.state.name,
-      description: this.state.description,
+      priority: this.state.priority,
       status: this.state.status
     })
       .then(res => {
@@ -36,7 +36,7 @@ class Header extends Component {
         <div className="container register-form">
           <div className="form">
             <div className="note">
-              <p> Create new project. </p>
+              <p> Create new task. </p>
             </div>
 
             <div className="form-content">
@@ -55,10 +55,10 @@ class Header extends Component {
                   <div className="form-group">
                     <input
                       type="text"
-                      name="description"
+                      name="priority"
                       className="form-control"
-                      placeholder="Description *"
-                      value={this.state.description}
+                      placeholder="Priority *"
+                      value={this.state.priority}
                       onChange={this.handleChange}
                     />
                   </div>

@@ -1,12 +1,12 @@
 import React from 'react';
-import ProjectInfo from './ProjectInfo'
+import TaskCreate from './TaskCreate'
 import {useParams} from "react-router";
 
 function Info() {
   let {id} = useParams();
   return (
     <div  className="d-flex flex-column">
-      <ProjectInfo id={id} />
+      <TaskCreate id={id} />
     </div >
   );
 }

@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * Service repository interface implementation with autowired project and task databases.
@@ -63,8 +65,12 @@ public class ServiceRepositoryImp implements ServiceRepository {
      * @see TaskNotFindException
      */
     @Override
-    public Task getTaskById(Long id) {
-        return taskDatabase.findById(id).orElseThrow(TaskNotFindException::new);
+    public List<Task> getTaskById(Long id) {
+        List<Task> list = (List<Task>) taskDatabase.findAll();
+        return list.stream()
+                .filter(task -> task.getId()==id)
+                .collect(Collectors.toList());
+
     }
 
     /**
@@ -73,7 +79,11 @@ public class ServiceRepositoryImp implements ServiceRepository {
      * @return task with same name
      */
     @Override
-    public Task getTaskByName(String name) {
+    public List<Task> getTaskByName(String name) {
+        /*List<Task> list = (List<Task>) taskDatabase.findAll();
+        return  list.stream()
+                .filter(task -> task.getName().equals(name))
+                .collect(Collectors.toList());*/
         return taskDatabase.findByName(name);
     }
 

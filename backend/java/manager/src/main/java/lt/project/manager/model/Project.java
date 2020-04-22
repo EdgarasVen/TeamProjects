@@ -46,6 +46,7 @@ public class Project {
      * @param task Object
      */
     public void addTask(Task task){
+        task.setProjectN(this.getName());
         tasks.add(task);
         task.setProject(this);
     }

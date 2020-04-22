@@ -33,7 +33,13 @@ public class ManagerApplication implements CommandLineRunner {
 
 		p1.addTask(new Task("Test", Priority.LOW,Status.WAITING));
 		p1.addTask(new Task("Start", Priority.MEDIUM,Status.WAITING));
-		p1.addTask(new Task("Stop", Priority.HIGH,Status.WAITING));*/
+		p1.addTask(new Task("Stop", Priority.HIGH,Status.WAITING));
+
+
+
+		repository.createProject(p1);
+		repository.createProject(p2);
+		repository.createProject(p3);*/
 
 		for (int i = 0; i < 10; i++) {
 			Project p = new Project("Project name "+i,
@@ -48,11 +54,6 @@ public class ManagerApplication implements CommandLineRunner {
 			}
 			repository.createProject(p);
 		}
-
-		/*repository.createProject(p1);
-		repository.createProject(p2);
-		repository.createProject(p3);*/
-
 
 	}
 }

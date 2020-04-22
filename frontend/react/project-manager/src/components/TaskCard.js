@@ -34,6 +34,7 @@ class Card extends Component {
                         <p className="card-text" key="2">Priority : {this.props.priority}</p>
                         <p className="card-text" key="3">Status : {this.props.status}</p>
                         <p className="card-text" key="3">Date : {this.props.date}</p>
+                        <p className="card-text" key="4">Project : {this.props.pName}</p>
                     </div>
 
                 </div>

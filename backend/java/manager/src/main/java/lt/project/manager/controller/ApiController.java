@@ -21,7 +21,7 @@ import java.util.List;
  * @version 1.0
  *
  */
-
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 public class ApiController {
     /**

@@ -9,7 +9,7 @@ import {
 } from "react-router-dom";
 
 
-class Projects extends Component {
+class Tasks extends Component {
 
     constructor(props) {
         super(props);
@@ -79,6 +79,7 @@ class Projects extends Component {
                     <div className="overflow">
                         {tasks.map((t) =>
                             <Card
+                            id={t.id}
                             name={t.name}
                             pName={t.projectN}
                             priority={t.priority}
@@ -95,4 +96,4 @@ class Projects extends Component {
 
 }
 
-export default Projects;
+export default Tasks;

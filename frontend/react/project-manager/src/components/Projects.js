@@ -31,7 +31,7 @@ class Projects extends Component {
     Submit = async (event) => {
         event.preventDefault();
 
-        await axios.get(`http://localhost:8080/api/project/${this.state.name}`)
+        await axios.get(`http://localhost:8080/api/project/name/${this.state.name}`)
         .then(res => {
             this.setState({ projects: res.data })
         })

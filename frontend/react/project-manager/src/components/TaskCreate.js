@@ -32,9 +32,9 @@ class Header extends Component {
 
   render() {
     return (
-      <header className="jumbotron my-4">
-        <div className="container register-form">
-          <div className="form">
+      
+        <div className="card-body">
+          <div >
             <div className="note">
               <p> Create new task for project {this.props.id}. </p>
             </div>
@@ -42,35 +42,48 @@ class Header extends Component {
             <div className="form-content">
               <div className="row">
                 <div className="col-md-8">
-                  <div className="form-group">
+                <div className="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1">Name</span>
+                  </div>
                     <input
                       type="text"
                       name="name"
                       className="form-control"
-                      placeholder="Project name *"
+                      placeholder="Task name *"
                       value={this.state.name}
                       onChange={this.handleChange}
                     />
                   </div>
-                  <div className="form-group">
-                    <input
-                      type="text"
+                  <div className="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon2">Priority</span>
+                  </div>
+                    <select
                       name="priority"
                       className="form-control"
-                      placeholder="Priority *"
                       value={this.state.priority}
-                      onChange={this.handleChange}
-                    />
+                      onChange={this.handleChange}>
+                      <option selected>Choose...</option>
+                      <option value="LOW">LOW</option>
+                      <option value="MEDIUM">MEDIUM</option>
+                      <option value="HIGH">HIGH</option>
+                    </select>
                   </div>
-                  <div className="form-group">
-                    <input
-                      type="text"
+                  <div className="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon3">Status</span>
+                  </div>
+                    <select
                       name="status"
                       className="form-control"
-                      placeholder="Status *"
                       value={this.state.status}
-                      onChange={this.handleChange}
-                    />
+                      onChange={this.handleChange}>
+                      <option selected>Choose...</option>
+                      <option value="WAITING">WAITING</option>
+                      <option value="ONGOING">ONGOING</option>
+                      <option value="FINISHED">FINISHED</option>
+                    </select>
                   </div>
 
                 </div>
@@ -79,11 +92,11 @@ class Header extends Component {
                 onClick={this.Submit}
                 type="button"
                 className="btn btn-primary">
-                Add this project</button>
+                Add task</button>
             </div>
           </div>
         </div>
-      </header>
+      
     )
   }
 

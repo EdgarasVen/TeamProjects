@@ -1,14 +1,14 @@
 import React from 'react';
-import ProjectInfo from './ProjectInfo'
+import Info from './TaskInfo'
 import {useParams} from "react-router";
 
-function ProjectsInfo() {
+function TaskInfo() {
   let {id} = useParams();
   return (
     <div  className="d-flex flex-column">
-      <ProjectInfo id={id} />
+      <Info id={id} />
     </div >
   );
 }
 
-export default ProjectsInfo;
+export default TaskInfo;

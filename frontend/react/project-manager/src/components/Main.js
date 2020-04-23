@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import Sidebar from './Sidebar'
-import Projects from './Projects'
-import ProjectInfo from './ProjectInfoWrapper'
-import ProjectCreate from './ProjectCreateWrapper'
-import ProjectEdit from './ProjectEditWrapper'
-import TaskCreate from './TaskCreateWrapper'
-import Tasks from './Tasks'
+import Sidebar from './Sidebar';
+import Projects from './Projects';
+import ProjectInfo from './ProjectInfoWrapper';
+import TaskInfo from './TaskInfoWrapper';
+import ProjectCreate from './ProjectCreateWrapper';
+import ProjectEdit from './ProjectEditWrapper';
+import TaskCreate from './TaskCreateWrapper';
+import Tasks from './Tasks';
 
 import axios from 'axios';
 import {
@@ -46,6 +47,9 @@ class Main extends Component {
                         </Route>
                         <Route path="/project/add/:id">
                         <TaskCreate />    
+                        </Route>
+                        <Route path="/task/info/:id">
+                        <TaskInfo />    
                         </Route>
                     </Switch>
                     </div>               

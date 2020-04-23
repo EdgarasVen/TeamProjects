@@ -1,14 +1,14 @@
-.sticky {
+  .sticky {
     position: fixed;
     top: 0;
     z-index: 1;
-  }
+}
   .overflow{
     position: fixed;
     width: 82%;
     height: 85%;
     overflow: auto;
-  }
+}
 
   .overflowSmall{
   position: fixed;
@@ -16,3 +16,9 @@
   height: 50%;
   overflow: auto;
 }
+
+ .input-group {
+  width: 500px;
+  
+}
+

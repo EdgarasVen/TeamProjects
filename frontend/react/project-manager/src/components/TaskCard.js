@@ -22,7 +22,7 @@ class Card extends Component {
                             <div className="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
                                 <div className="dropdown-header">Settings:</div>
                                 
-                                <Link className="dropdown-item" to={`project/info/${this.props.name}`} >More info</Link>
+                                <Link className="dropdown-item" to={`task/info/${this.props.id}`} >More info</Link>
                                 <div className="dropdown-divider"></div>
                                 <a className="dropdown-item" href="#">Delete this task</a>
                             </div>

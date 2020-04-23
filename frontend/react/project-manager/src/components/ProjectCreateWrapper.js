@@ -3,13 +3,13 @@ import ProjectCreate from './ProjectCreate'
 import { useHistory } from "react-router-dom";
 
 
-function Edit() {
+function Create() {
     let history = useHistory();
   return (
-    <div  className="d-flex flex-column">
+    <div  className="row ">
       <ProjectCreate history={history} />
     </div >
   );
 }
 
-export default Edit;
+export default Create;

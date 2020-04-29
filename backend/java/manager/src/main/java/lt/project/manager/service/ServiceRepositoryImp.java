@@ -128,6 +128,15 @@ public class ServiceRepositoryImp implements ServiceRepository {
     }
 
     /**
+     * Delete project with same id from database
+     * @param id Long
+     */
+    @Override
+    public void deleteProjectByid(Long id) {
+        projectDatabase.deleteById(id);
+    }
+
+    /**
      * Clone old project object form database and update all parameters from new project
      * @param project new object
      * @param id project id

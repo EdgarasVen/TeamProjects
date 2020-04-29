@@ -17,7 +17,7 @@ function Sidebar() {
         <div className="sidebar-brand-icon rotate-n-15">
           <i className="fas fa-laugh-wink"></i>
         </div>
-        <div className="sidebar-brand-text mx-3">SB Admin <sup>2</sup></div>
+        <div className="sidebar-brand-text mx-3">Manager <sup></sup></div>
       </a>
 
       {/* Divider */}
@@ -40,17 +40,25 @@ function Sidebar() {
 
 
       {/* Nav Item - Charts */}
-      <li className="nav-item">
-        <Link className="nav-link" to="/projects">
-          <i className="fas fa-fw fa-folder"></i>
-          <span>All Projects</span></Link>
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+          <i class="fas fa-fw fa-cog"></i>
+          <span>Projects</span>
+        </a>
+        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            
+            <Link class="collapse-item" to="/projects">Project List</Link>
+            <Link class="collapse-item" to="/project/create">Create New Project</Link>
+          </div>
+        </div>
       </li>
 
       {/* Nav Item - Tables */}
       <li className="nav-item">
         <Link className="nav-link" to="/tasks">
           <i className="fas fa-fw fa-table"></i>
-          <span>All Tasks</span></Link>
+          <span>Tasks</span></Link>
       </li>
 
       {/* Divider */}

@@ -89,7 +89,7 @@ class Header extends Component {
               onClick={this.Submit}
               type="button"
               className="btn btn-primary">
-              Add this project</button>
+              Submit</button>
           </div>
         </div>
       </div>

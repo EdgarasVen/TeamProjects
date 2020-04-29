@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import Sidebar from './Sidebar';
-import Projects from './Projects';
+import Projects from './ProjectsTable';
 import ProjectInfo from './ProjectInfoWrapper';
 import TaskInfo from './TaskInfoWrapper';
 import ProjectCreate from './ProjectCreateWrapper';
 import ProjectEdit from './ProjectEditWrapper';
 import TaskCreate from './TaskCreateWrapper';
-import Tasks from './Tasks';
+import Tasks from './TasksTable';
 
 import axios from 'axios';
 import {
@@ -24,6 +24,7 @@ class Main extends Component {
 
 
     render() {
+        
         return (
             <div id="wrapper">
                 <Router >
@@ -49,6 +50,9 @@ class Main extends Component {
                         <TaskCreate />    
                         </Route>
                         <Route path="/task/info/:id">
+                        <TaskInfo />    
+                        </Route>
+                        <Route path="/project/info/task/info/:id">
                         <TaskInfo />    
                         </Route>
                     </Switch>

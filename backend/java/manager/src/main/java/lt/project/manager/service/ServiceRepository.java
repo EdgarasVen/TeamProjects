@@ -30,10 +30,12 @@ public interface ServiceRepository {
     //Delete
     void deleteProjectByName(String name);
     void deleteTaskById(Long id);
+    void deleteProjectByid(Long id);
 
     //Put
     void updateProject(Project project, Long id);
    	void updateTask(Task task, Long projectId);
+
 
 
 }

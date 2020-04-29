@@ -41,7 +41,7 @@ public class ManagerApplication implements CommandLineRunner {
 		repository.createProject(p2);
 		repository.createProject(p3);*/
 
-		for (int i = 0; i < 10; i++) {
+		for (int i = 0; i < 20; i++) {
 			Project p = new Project("Project name "+i,
 					"Axios is promise-based and thus we can take " +
 							"advantage of async and await for more readable " +

@@ -92,12 +92,12 @@ public class ApiController {
 
     /**
      * DELETE api method
-     * Delete project by name
-     * @param name project name
+     * Delete project by id
+     * @param id project id
      */
-    @DeleteMapping("api/project/{name}")
-    public void deleteProjectByName(@PathVariable String name){
-        repository.deleteProjectByName(name);
+    @DeleteMapping("api/project/{id}")
+    public void deleteProjectByName(@PathVariable Long id){
+        repository.deleteProjectByid(id);
     }
 
     /**

@@ -55,7 +55,7 @@ class Projects extends Component {
                             <input 
                                 type="text"
                                 name="name"
-                                class="form-control bg-light border-0 small"
+                                className="form-control bg-light border-0 small"
                                 placeholder="Search for..."
                                 aria-label="Search"
                                 aria-describedby="basic-addon2"
@@ -67,7 +67,7 @@ class Projects extends Component {
                                     onClick={this.Submit}
                                     className="btn btn-primary"
                                     type="button">
-                                    <i class="fas fa-search fa-sm"></i>
+                                    <i className="fas fa-search fa-sm"></i>
                                 </Link>
                             </div>
                         </div>

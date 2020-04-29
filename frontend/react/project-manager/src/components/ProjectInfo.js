@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Card from "./TaskCard";
+import Table from "./Table";
 import axios from 'axios';
 import {
     Link
@@ -25,7 +26,21 @@ class Project extends Component {
             })
     }
 
+    Submit = () => {
+        axios.post(`http://localhost:8080/api/project`, {
+          name: this.state.name,
+          description: this.state.description,
+          status: this.state.status
+        })
+          .then(res => {
+            console.log(res);
+            console.log(res.data);
+            this.props.history.push(`/projects`);
+          })
+      }
+
     render() {
+        let overflowTypo="overflowSmall";
         var { isFetching,projects } = this.state;
         if (!isFetching){
             return <div>Loading ....</div>
@@ -40,8 +55,8 @@ class Project extends Component {
                         <i className="fas  fa-sm text-white-50"></i> Add Task </Link>
                     <Link to={`/project/edit/${this.props.id}`} className="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm ml-4">
                         <i className="fas  fa-sm text-white-50"></i> Edit </Link>
-                    <Link to="" className="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm ml-4">
-                        <i className="fas  fa-sm text-white-50"></i> Delete </Link>
+                    <button onClick={this.Submit} className="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm ml-4">
+                        <i className="fas  fa-sm text-white-50"></i> Delete </button>
                 </div>
                 {projects.map((item, i) =>
                     <div>
@@ -49,17 +64,15 @@ class Project extends Component {
                             <p className="card-text " key="1">Name : {item.name}</p>
                             <p className="card-text" key="2">Description : {item.description}</p>
                             <p className="card-text" key="3">Status : {item.status}</p>
-                            <h2>Project Tasks</h2>
-                            <div className="overflowSmall ">
-                                {item.tasks.map((t) =>
-                                    <Card
-                                        name={t.name}
-                                        pName={t.projectN}
-                                        priority={t.priority}
-                                        status={t.status}
-                                        date={t.date}
-                                    />)
-                                }
+                       
+                            <div >
+                                    <Table
+                                        overflow={overflowTypo}
+                                        columns={this.props.columns}
+                                        data={item.tasks}
+                                        
+                                    />
+                                
                             </div>
                         </div>
 

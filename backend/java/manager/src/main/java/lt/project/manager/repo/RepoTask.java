@@ -17,5 +17,5 @@ import java.util.Optional;
 public interface RepoTask extends JpaRepository<Task, Long> {
 
     @Transactional
-    List<Task> findByName(String name);
+    Task findByName(String name);
 }

@@ -20,5 +20,5 @@ public interface RepoProject extends JpaRepository<Project,Long> {
     @Transactional
     void deleteByName(String name);
     @Transactional
-    List<Project> findByName(String name);
+    Project findByName(String name);
 }

@@ -41,16 +41,19 @@ public class ManagerApplication implements CommandLineRunner {
 		repository.createProject(p2);
 		repository.createProject(p3);*/
 
-		for (int i = 0; i < 20; i++) {
-			Project p = new Project("Project name "+i,
+		for (int i = 1; i < 20; i++) {
+			Project p = new Project("Project  "+i,
 					"Axios is promise-based and thus we can take " +
 							"advantage of async and await for more readable " +
 							"asynchronous code. We can also intercept and " +
 							"cancel requests, and there’s built-in client " +
 							"side protection against cross site request forgery. "
 					, Status.WAITING);
-			for (int j = 0; j < 10; j++) {
-				p.addTask(new Task("Test task no "+j, Priority.LOW,Status.WAITING));
+			for (int j = 1; j < 10; j++) {
+				p.addTask(new Task("Task  "+j, Priority.LOW,
+						"Axios is promise-based and thus we can take " +
+						"advantage of async and await for more readable " ,
+						Status.WAITING));
 			}
 			repository.createProject(p);
 		}

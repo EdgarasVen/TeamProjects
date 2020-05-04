@@ -27,7 +27,7 @@ public class TransferProject {
     @Length(min=1,max=120)
     private String name;
     @NotNull
-    @Length(min=1,max=120)
+    @Length(min=1,max=320)
     private String description;
     private Status status;
 

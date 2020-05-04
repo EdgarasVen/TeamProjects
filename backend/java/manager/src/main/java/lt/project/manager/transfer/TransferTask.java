@@ -27,6 +27,9 @@ public class TransferTask {
     @Length(min=1,max=120)
     private String name;
     private Priority priority;
+    @NotNull
+    @Length(min=1,max=320)
+    private String description;
     private Status status;
 
     /**
@@ -34,7 +37,7 @@ public class TransferTask {
      * @return Task
      */
 	public Task build() {
-		return new Task(name, priority, status);
+		return new Task(name, priority,description, status);
 	}
 
 }

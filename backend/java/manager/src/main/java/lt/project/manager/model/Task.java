@@ -28,9 +28,10 @@ import java.util.Date;
 public class Task {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.TABLE)
     private Long id;
     private String name;
+    private String description;
     @Enumerated(EnumType.STRING)
     private Priority priority;
     @Enumerated(EnumType.STRING)
@@ -43,9 +44,10 @@ public class Task {
     private Project project;
     private String projectN;
 
-    public Task(String name, Priority priority, Status status) {
+    public Task(String name, Priority priority,String description, Status status) {
         this.name = name;
         this.priority = priority;
+        this.description = description;
         this.status = status;
         date=LocalDate.now();
     }

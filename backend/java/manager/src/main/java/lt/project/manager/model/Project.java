@@ -1,6 +1,5 @@
 package lt.project.manager.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import lt.project.manager.enums.Status;
 
@@ -27,6 +26,10 @@ public class Project {
     private Long id;
     private String name;
     private String description;
+    private Long taskCompleted;
+    private int taskSize;
+    private Long percentage;
+
     @Enumerated(EnumType.STRING)
     private Status status;
     //@JsonIgnore
@@ -49,5 +52,19 @@ public class Project {
         task.setProjectN(this.getName());
         tasks.add(task);
         task.setProject(this);
+    }
+
+    public int getTaskSize() {
+        return tasks.size();
+    }
+
+    public Long getTaskCompleted() {
+        return tasks.stream()
+                .filter(task -> task.getStatus()==Status.FINISHED)
+                .count();
+    }
+
+    public Long getPercentage() {
+        return getTaskCompleted()*100/getTaskSize();
     }
 }

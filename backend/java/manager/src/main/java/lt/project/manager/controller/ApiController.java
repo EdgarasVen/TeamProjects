@@ -48,7 +48,7 @@ public class ApiController {
      * @return Project object
      */
     @GetMapping("/api/project/id/{id}")
-    public List<Project> getProjectById(@PathVariable Long id){
+    public Project getProjectById(@PathVariable Long id){
         return repository.getProjectById(id);
     }
     /**
@@ -57,8 +57,18 @@ public class ApiController {
      * @return Project object
      */
     @GetMapping("/api/project/name/{name}")
-    public List<Project> getProjectByName(@PathVariable String name){
+    public Project getProjectByName(@PathVariable String name){
         return repository.getProjectByName(name);
+    }
+
+    /**
+     * GET api method
+     * @param name project name
+     * @return List Project object
+     */
+    @GetMapping("/api/project/search/{name}")
+    public List<Project> searchProjectByName(@PathVariable String name){
+        return repository.searchProjectByString(name);
     }
 
     /**
@@ -76,7 +86,7 @@ public class ApiController {
      * @return Task object
      */
     @GetMapping("/api/task/id/{id}")
-    public List<Task> getTaskById(@PathVariable Long id){
+    public Task getTaskById(@PathVariable Long id){
         return repository.getTaskById(id);
     }
 
@@ -86,9 +96,20 @@ public class ApiController {
      * @return Task object
      */
     @GetMapping("/api/task/name/{name}")
-    public List<Task> getTaskByName(@PathVariable String name){
+    public Task getTaskByName(@PathVariable String name){
         return repository.getTaskByName(name);
     }
+
+    /**
+     * GET api method
+     * @param name task name
+     * @return Task object
+     */
+    @GetMapping("/api/task/search/{name}")
+    public List<Task> searchTaskByName(@PathVariable String name){
+        return repository.searchTaskByString(name);
+    }
+
 
     /**
      * DELETE api method
@@ -96,7 +117,7 @@ public class ApiController {
      * @param id project id
      */
     @DeleteMapping("api/project/{id}")
-    public void deleteProjectByName(@PathVariable Long id){
+    public void deleteProjectById(@PathVariable Long id){
         repository.deleteProjectByid(id);
     }
 

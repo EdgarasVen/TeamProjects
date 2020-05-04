@@ -9,6 +9,7 @@ import lt.project.manager.repo.RepoTask;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -54,7 +55,7 @@ public class ServiceRepositoryImp implements ServiceRepository {
      * @return project with same name
      */
     @Override
-    public List<Project> getProjectByName(String name) {
+    public Project getProjectByName(String name) {
         return projectDatabase.findByName(name);
     }
 
@@ -65,11 +66,8 @@ public class ServiceRepositoryImp implements ServiceRepository {
      * @see TaskNotFindException
      */
     @Override
-    public List<Task> getTaskById(Long id) {
-        List<Task> list = taskDatabase.findAll();
-        return list.stream()
-                .filter(task -> task.getId()==id)
-                .collect(Collectors.toList());
+    public Task getTaskById(Long id) {
+        return  taskDatabase.findById(id).orElseThrow(TaskNotFindException::new);
 
     }
 
@@ -79,7 +77,7 @@ public class ServiceRepositoryImp implements ServiceRepository {
      * @return task with same name
      */
     @Override
-    public List<Task> getTaskByName(String name) {
+    public Task getTaskByName(String name) {
         /*List<Task> list = (List<Task>) taskDatabase.findAll();
         return  list.stream()
                 .filter(task -> task.getName().equals(name))
@@ -93,10 +91,33 @@ public class ServiceRepositoryImp implements ServiceRepository {
      * @return project with this id
      */
     @Override
-    public List<Project> getProjectById(Long id) {
+    public Project getProjectById(Long id) {
+        return projectDatabase.findById(id).orElseThrow(ProjectNotFindException::new);
+    }
+
+    /**
+     *
+     * @param string to find in project list
+     * @return projects with similarities
+     */
+    @Override
+    public List<Project> searchProjectByString(String string) {
         List<Project> list = projectDatabase.findAll();
         return list.stream()
-                .filter(project -> project.getId()==id)
+                .filter(project -> project.getName().contains(string))
+                .collect(Collectors.toList());
+    }
+
+    /**
+     *
+     * @param name name of task
+     * @return list of task
+     */
+    @Override
+    public List<Task> searchTaskByString(String name) {
+        List<Task> list = taskDatabase.findAll();
+        return list.stream()
+                .filter(task -> task.getName().contains(name))
                 .collect(Collectors.toList());
     }
 
@@ -160,6 +181,7 @@ public class ServiceRepositoryImp implements ServiceRepository {
         Task t=taskDatabase.findById(id).orElseThrow(TaskNotFindException::new);
         t.setName(task.getName());
         t.setPriority(task.getPriority());
+        t.setDescription(task.getDescription());
         t.setStatus(task.getStatus());
         taskDatabase.save(t);
 

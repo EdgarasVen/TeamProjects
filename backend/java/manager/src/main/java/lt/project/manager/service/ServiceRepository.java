@@ -18,10 +18,13 @@ public interface ServiceRepository {
     //Get
     List<Project> getProjects();
     List<Task> getTasks();
-    List<Project> getProjectByName(String name);
-    List<Task> getTaskById(Long id);
-    List<Task> getTaskByName(String name);
-    List<Project> getProjectById(Long id);
+    Project getProjectByName(String name);
+    Task getTaskById(Long id);
+    Task getTaskByName(String name);
+    Project getProjectById(Long id);
+    List<Project> searchProjectByString(String string);
+    List<Task> searchTaskByString(String name);
+
 
     //Post
     void createProject(Project project);
@@ -35,7 +38,6 @@ public interface ServiceRepository {
     //Put
     void updateProject(Project project, Long id);
    	void updateTask(Task task, Long projectId);
-
 
 
 }

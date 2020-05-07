@@ -1,8 +1,12 @@
 import React, { Component } from 'react';
 import Card from './ProjectCard';
+import history from './login/History';
+import AuthenticationService from './fetch/FetchService';
 
 import axios from 'axios';
 
+const API_URL = 'http://localhost:8080';
+const isUserLoggedIn = AuthenticationService.isUserLoggedIn();
 
 
 class Projects extends Component {
@@ -17,28 +21,40 @@ class Projects extends Component {
     }
 
     componentDidMount() {
-        axios
-            .get("http://localhost:8080/api/project")
-            .then(res => {
-                console.log("---"+"");
-                
-                this.setState({
-                    projects: res.data,
-                    isFetching: true
-                })
+        axios.get(`${API_URL}/api/project`,
+            { headers: { Authorization: sessionStorage.getItem('token') } }
+        ).then(res => {
+            this.setState({
+                projects: res.data,
+                isFetching: true
             })
+        })
+        .catch(function (error) {
+            if (error.status==="undefined" && !isUserLoggedIn){
+                alert("You are not authorized to access this page");
+                history.push(`/login`)
+                window.location.reload()
+            }
+          })
     }
 
 
-    Submit =  (event) => {
-         axios.get(`http://localhost:8080/api/project/search/${this.state.name}`)
+    Submit = (event) => {
+        axios.get(`${API_URL}/api/project/search/${this.state.name}`,
+        { headers: { Authorization: sessionStorage.getItem('token') } }
+        )
             .then(res => {
-                console.log("---"+"");
                 this.setState({
                     projects: res.data
                 })
-
             })
+            .catch(function (error) {
+                if (error.status==="undefined" && !isUserLoggedIn){
+                    alert("You are not authorized to access this page");
+                    history.push(`/login`)
+                    window.location.reload()
+                }
+              })
 
     }
 
@@ -51,10 +67,13 @@ class Projects extends Component {
         if (!isFetching) {
             return <div>Loading ....</div>
         }
+        else if (projects == null) {
+            return <div className="alert alert-warning">Data base fetch problem</div>
+        }
         else {
             return (
                 <div >
-                    <h2>Projects</h2>
+                    <h2>Projects </h2>
                     <form className="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
                         <div className="input-group">
                             <input

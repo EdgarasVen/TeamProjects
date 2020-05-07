@@ -10,6 +10,8 @@ import Tasks from './Tasks';
 import TaskCreate from './TaskCreateWrapper';
 import TaskEdit from './TaskEditWrapper';
 
+import Login from './login/Login';
+
 import {
     BrowserRouter as Router,
     Switch,
@@ -28,6 +30,9 @@ class Main extends Component {
                     <div id="page-content-wrapper">
                         <Topbar />
                         <Switch>
+                            <Route path="/login">
+                                <Login />
+                            </Route>
                             <Route path="/projects">
                                 <Projects />
                             </Route>
@@ -40,7 +45,7 @@ class Main extends Component {
                             <Route path="/project/info/:id">
                                 <ProjectInfo />
                             </Route>
-                            
+
                             <Route path="/project/add/:id">
                                 <TaskCreate />
                             </Route>

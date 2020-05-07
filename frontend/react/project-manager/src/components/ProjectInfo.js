@@ -4,6 +4,9 @@ import axios from 'axios';
 import {
     Link
 } from "react-router-dom";
+import history from './login/History';
+import AuthenticationService from './fetch/FetchService';
+const isUserLoggedIn = AuthenticationService.isUserLoggedIn();
 
 
 class Project extends Component {
@@ -18,32 +21,59 @@ class Project extends Component {
 
     componentDidMount() {
         axios
-            .get(`http://localhost:8080/api/project/id/${this.props.id}`)
+            .get(`http://localhost:8080/api/project/id/${this.props.id}`,
+            { headers: { Authorization: sessionStorage.getItem('token') } }
+            )
             .then(res => {
                 this.setState({
                     project: res.data,
                     isFetching: true,
                 })
             })
+            .catch(function (error) {
+                if (error.status==="undefined" && !isUserLoggedIn){
+                    alert("You are not authorized to access this page");
+                    history.push(`/login`)
+                    window.location.reload()
+                }
+              })
+            
     }
 
     componentDidUpdate() {
         axios
-            .get(`http://localhost:8080/api/project/id/${this.props.id}`)
+            .get(`http://localhost:8080/api/project/id/${this.props.id}`,
+            { headers: { Authorization: sessionStorage.getItem('token') } }
+            )
             .then(res => {
                 this.setState({
                     project: res.data,
                     isFetching: true,
                 })
             })
+            .catch(function (error) {
+                if (error.status==="undefined" && !isUserLoggedIn){
+                    alert("You are not authorized to access this page");
+                    history.push(`/login`)
+                    window.location.reload()
+                }
+              })
     }
 
     Submit = () => {
-        axios.delete(`http://localhost:8080/api/project/${this.props.id}`)
+        axios.delete(`http://localhost:8080/api/project/${this.props.id}`,
+        { headers: { Authorization: sessionStorage.getItem('token') } }
+        )
             .then(res => {
-                console.log("---" + "");
                 this.props.history.push(`/projects`);
             })
+            .catch(function (error) {
+                if (error.status==="undefined" && !isUserLoggedIn){
+                    alert("You are not authorized to access this page");
+                    history.push(`/login`)
+                    window.location.reload()
+                }
+              })
     }
 
     render() {
@@ -61,8 +91,8 @@ class Project extends Component {
                                 <p className="card-text " key="1">Name : {project.name}</p>
                                 <p className="card-text" key="2">Description : {project.description}</p>
                                 <p className="card-text" key="3">Status : {project.status}</p>
-                                <p className="card-text" key="3">Tasks completed : {project.taskCompleted}</p>
-                                <p className="card-text" key="3">Tasks count : {project.taskSize}</p>
+                                <p className="card-text" key="4">Tasks completed : {project.taskCompleted}</p>
+                                <p className="card-text" key="5">Tasks count : {project.taskSize}</p>
 
                                 
 

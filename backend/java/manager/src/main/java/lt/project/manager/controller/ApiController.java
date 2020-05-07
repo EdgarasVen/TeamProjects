@@ -118,7 +118,7 @@ public class ApiController {
      */
     @DeleteMapping("api/project/{id}")
     public void deleteProjectById(@PathVariable Long id){
-        repository.deleteProjectByid(id);
+        repository.deleteProjectById(id);
     }
 
     /**

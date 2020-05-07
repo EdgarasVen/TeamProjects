@@ -3,16 +3,27 @@ import axios from 'axios';
 import {
     Link
 } from "react-router-dom";
+import history from './login/History';
+import AuthenticationService from './fetch/FetchService';
+const isUserLoggedIn = AuthenticationService.isUserLoggedIn();
 
 
 class Card extends Component {
 
     Submit = () => {
-        axios.delete(`http://localhost:8080/api/task/${this.props.id}`)
+        axios.delete(`http://localhost:8080/api/task/${this.props.id}`,
+        { headers: { Authorization: sessionStorage.getItem('token') } }
+        )
             .then(res => {
-                console.log("---"+"");
                 this.props.history.push(`/tasks`);
             })
+            .catch(function (error) {
+                if (error.status==="undefined" && !isUserLoggedIn){
+                    alert("You are not authorized to access this page");
+                    history.push(`/login`)
+                    window.location.reload()
+                }
+              })
     }
 
     render() {

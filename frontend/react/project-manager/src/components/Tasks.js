@@ -1,7 +1,12 @@
 import React, { Component } from 'react';
 import Card from './TaskCard';
+import history from './login/History';
+import AuthenticationService from './fetch/FetchService';
+
 import axios from 'axios';
 
+const API_URL = 'http://localhost:8080';
+const isUserLoggedIn = AuthenticationService.isUserLoggedIn();
 
 class Tasks extends Component {
 
@@ -16,37 +21,81 @@ class Tasks extends Component {
 
     componentDidMount() {
         axios
-            .get("http://localhost:8080/api/task")
+            .get(`${API_URL}/api/task`,
+            { headers: { Authorization: sessionStorage.getItem('token') } }
+            )
             .then(res => {
-                console.log("---"+"");
                 this.setState({
                     projects: res.data,
                     isFetching: true
                 })
             })
+            .catch(function (error) {
+                if (error.status==="undefined" && !isUserLoggedIn){
+                    alert("You are not authorized to access this page");
+                    history.push(`/login`)
+                    window.location.reload()
+                }
+              })
+    }
+
+    componentDidUpdate() {
+        axios
+            .get(`${API_URL}/api/task`,
+            { headers: { Authorization: sessionStorage.getItem('token') } }
+            )
+            .then(res => {
+                this.setState({
+                    projects: res.data,
+                    isFetching: true
+                })
+            })
+            .catch(function (error) {
+                if (error.status==="undefined" && !isUserLoggedIn){
+                    alert("You are not authorized to access this page");
+                    history.push(`/login`)
+                    window.location.reload()
+                }
+              })
     }
 
 
     Submit = (event) => {
         event.preventDefault();
 
-        axios.get(`http://localhost:8080/api/project/name/${this.state.name}`)
+        axios.get(`${API_URL}/api/project/name/${this.state.name}`,
+        { headers: { Authorization: sessionStorage.getItem('token') } }
+        )
             .then(res => {
-                console.log("---"+"");
                 this.setState({ projects: res.data })
             })
+            .catch(function (error) {
+                if (error.status==="undefined" && !isUserLoggedIn){
+                    alert("You are not authorized to access this page");
+                    history.push(`/login`)
+                    window.location.reload()
+                }
+              })
 
     }
 
     Submit = (event) => {
-        axios.get(`http://localhost:8080/api/task/search/${this.state.name}`)
+        axios.get(`${API_URL}/api/task/search/${this.state.name}`,
+        { headers: { Authorization: sessionStorage.getItem('token') } }
+        )
             .then(res => {
-                console.log("---"+"");
                 this.setState({
                     projects: res.data
                 })
 
             })
+            .catch(function (error) {
+                if (error.status==="undefined" && !isUserLoggedIn){
+                    alert("You are not authorized to access this page");
+                    history.push(`/login`)
+                    window.location.reload()
+                }
+              })
 
     }
 

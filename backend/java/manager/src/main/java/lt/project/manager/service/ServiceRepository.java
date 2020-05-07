@@ -23,7 +23,7 @@ public interface ServiceRepository {
     Task getTaskByName(String name);
     Project getProjectById(Long id);
     List<Project> searchProjectByString(String string);
-    List<Task> searchTaskByString(String name);
+    List<Task> searchTaskByString(String string);
 
 
     //Post
@@ -33,11 +33,11 @@ public interface ServiceRepository {
     //Delete
     void deleteProjectByName(String name);
     void deleteTaskById(Long id);
-    void deleteProjectByid(Long id);
+    void deleteProjectById(Long id);
 
     //Put
-    void updateProject(Project project, Long id);
-   	void updateTask(Task task, Long projectId);
+    void updateProject(Project newProject, Long id);
+   	void updateTask(Task newTask, Long projectId);
 
 
 }

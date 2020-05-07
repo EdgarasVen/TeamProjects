@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import history from './login/History';
+import AuthenticationService from './fetch/FetchService';
+const isUserLoggedIn = AuthenticationService.isUserLoggedIn();
 
 class Header extends Component {
 
@@ -16,24 +19,34 @@ class Header extends Component {
 
 
   Submit = () => {
-    axios.put(`http://localhost:8080/api/task/${this.props.id}`, {
+    axios.put(`http://localhost:8080/api/task/${this.props.id}`
+    , {
       name: this.state.name,
       priority: this.state.priority,
       status: this.state.status,
       description: this.state.description
-    })
+    },
+    { headers: { Authorization: sessionStorage.getItem('token') } }
+    )
       .then(res => {
-        console.log("---"+"");
         this.props.history.goBack();
+      })
+      .catch(function (error) {
+        if (error.status==="undefined" && !isUserLoggedIn){
+            alert("You are not authorized to access this page");
+            history.push(`/login`)
+            window.location.reload()
+        }
       })
 
   }
 
   componentDidMount() {
     axios
-      .get(`http://localhost:8080/api/task/id/${this.props.id}`)
+      .get(`http://localhost:8080/api/task/id/${this.props.id}`,
+      { headers: { Authorization: sessionStorage.getItem('token') } }
+      )
       .then(res => {
-        console.log("---"+"");
         this.setState({
           name: res.data.name,
           priority: res.data.priority,
@@ -41,6 +54,13 @@ class Header extends Component {
           description: res.data.description,
           isFetching: true,
         })       
+      })
+      .catch(function (error) {
+        if (error.status==="undefined" && !isUserLoggedIn){
+            alert("You are not authorized to access this page");
+            history.push(`/login`)
+            window.location.reload()
+        }
       })
   }
 

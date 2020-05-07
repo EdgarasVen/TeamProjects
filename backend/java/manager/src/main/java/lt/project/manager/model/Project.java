@@ -65,6 +65,9 @@ public class Project {
     }
 
     public Long getPercentage() {
+        if (getTaskSize()==0)
+            return 100L;
+        else
         return getTaskCompleted()*100/getTaskSize();
     }
 }

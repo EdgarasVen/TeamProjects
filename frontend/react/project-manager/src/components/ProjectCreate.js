@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import AuthenticationService from './fetch/FetchService';
+import history from './login/History';
+const isUserLoggedIn = AuthenticationService.isUserLoggedIn();
 
 class Header extends Component {
 
@@ -14,16 +17,25 @@ class Header extends Component {
 
 
   Submit = () => {
-    axios.post(`http://localhost:8080/api/project`, {
+    axios.post(`http://localhost:8080/api/project`
+    , {
       name: this.state.name,
       description: this.state.description,
       status: "WAITING"
-    })
+    },
+    { headers: { Authorization: sessionStorage.getItem('token') } }
+    )
       .then(res => {
-        console.log("---" + "");
         this.props.history.push(`/projects`);
       })
-
+      .catch(function (error) {
+        console.log(error.status)
+        if (error.status==="undefined" && !isUserLoggedIn){
+            alert("You are not authorized to access this page");
+            history.push(`/login`)
+            window.location.reload()
+        }
+      })
   }
 
   handleChange = ({ target }) => {

@@ -1,5 +1,6 @@
 package lt.project.manager.service;
 
+import lombok.extern.slf4j.Slf4j;
 import lt.project.manager.exceptions.ProjectNotFindException;
 import lt.project.manager.exceptions.TaskNotFindException;
 import lt.project.manager.model.Project;
@@ -23,6 +24,7 @@ import java.util.stream.Collectors;
  */
 
 @Service
+@Slf4j
 public class ServiceRepositoryImp implements ServiceRepository {
 
     @Autowired
@@ -37,6 +39,7 @@ public class ServiceRepositoryImp implements ServiceRepository {
      */
     @Override
     public List<Project> getProjects() {
+        log.info("IN getProjects - projects find");
         return (List<Project>) projectDatabase.findAll();
     }
 
@@ -46,6 +49,7 @@ public class ServiceRepositoryImp implements ServiceRepository {
      */
     @Override
     public List<Task> getTasks() {
+        log.info("IN getTasks - tasks find");
         return (List<Task>) taskDatabase.findAll();
     }
 
@@ -56,6 +60,7 @@ public class ServiceRepositoryImp implements ServiceRepository {
      */
     @Override
     public Project getProjectByName(String name) {
+        log.info("IN getProjectByName - project find by name: {}",name);
         return projectDatabase.findByName(name);
     }
 
@@ -67,6 +72,7 @@ public class ServiceRepositoryImp implements ServiceRepository {
      */
     @Override
     public Task getTaskById(Long id) {
+        log.info("IN getTaskById - task find by id: {}",id);
         return  taskDatabase.findById(id).orElseThrow(TaskNotFindException::new);
 
     }
@@ -78,10 +84,7 @@ public class ServiceRepositoryImp implements ServiceRepository {
      */
     @Override
     public Task getTaskByName(String name) {
-        /*List<Task> list = (List<Task>) taskDatabase.findAll();
-        return  list.stream()
-                .filter(task -> task.getName().equals(name))
-                .collect(Collectors.toList());*/
+        log.info("IN getTaskByName - task find by name: {}",name);
         return taskDatabase.findByName(name);
     }
 
@@ -92,6 +95,7 @@ public class ServiceRepositoryImp implements ServiceRepository {
      */
     @Override
     public Project getProjectById(Long id) {
+        log.info("IN getProjectById - project find by id: {}",id);
         return projectDatabase.findById(id).orElseThrow(ProjectNotFindException::new);
     }
 
@@ -103,6 +107,7 @@ public class ServiceRepositoryImp implements ServiceRepository {
     @Override
     public List<Project> searchProjectByString(String string) {
         List<Project> list = projectDatabase.findAll();
+        log.info("IN searchProjectByString - projects find by string: {} , projects find size: {}",string, list.size());
         return list.stream()
                 .filter(project -> project.getName().contains(string))
                 .collect(Collectors.toList());
@@ -110,14 +115,15 @@ public class ServiceRepositoryImp implements ServiceRepository {
 
     /**
      *
-     * @param name name of task
+     * @param string name of task
      * @return list of task
      */
     @Override
-    public List<Task> searchTaskByString(String name) {
+    public List<Task> searchTaskByString(String string) {
         List<Task> list = taskDatabase.findAll();
+        log.info("IN searchTaskByString - tasks find by string: {} , tasks find size: {}",string, list.size());
         return list.stream()
-                .filter(task -> task.getName().contains(name))
+                .filter(task -> task.getName().contains(string))
                 .collect(Collectors.toList());
     }
 
@@ -128,6 +134,7 @@ public class ServiceRepositoryImp implements ServiceRepository {
     @Override
     public void createProject(Project project) {
         projectDatabase.save(project);
+        log.info("IN createProject - successfully saved project");
     }
 
     /**
@@ -137,6 +144,7 @@ public class ServiceRepositoryImp implements ServiceRepository {
     @Override
     public void deleteProjectByName(String name) {
         projectDatabase.deleteByName(name);
+        log.info("IN deleteProjectByName - successfully deleted project by name: {}",name);
     }
 
     /**
@@ -146,6 +154,7 @@ public class ServiceRepositoryImp implements ServiceRepository {
     @Override
     public void deleteTaskById(Long id) {
         taskDatabase.deleteById(id);
+        log.info("IN deleteTaskById - successfully deleted task by id: {}",id);
     }
 
     /**
@@ -153,38 +162,40 @@ public class ServiceRepositoryImp implements ServiceRepository {
      * @param id Long
      */
     @Override
-    public void deleteProjectByid(Long id) {
+    public void deleteProjectById(Long id) {
         projectDatabase.deleteById(id);
+        log.info("IN deleteProjectById - successfully deleted project by id: {}",id);
     }
 
     /**
      * Clone old project object form database and update all parameters from new project
-     * @param project new object
+     * @param newProject new object
      * @param id project id
      */
     @Override
-    public void updateProject(Project project, Long id) {
-        Project p =projectDatabase.findById(id).orElseThrow(ProjectNotFindException::new);
-        p.setName(project.getName());
-        p.setDescription(project.getDescription());
-        p.setStatus(project.getStatus());
-        projectDatabase.save(p);
+    public void updateProject(Project newProject, Long id) {
+        Project oldProject =projectDatabase.findById(id).orElseThrow(ProjectNotFindException::new);
+        oldProject.setName(newProject.getName());
+        oldProject.setDescription(newProject.getDescription());
+        oldProject.setStatus(newProject.getStatus());
+        projectDatabase.save(oldProject);
+        log.info("IN updateProject - successfully updated old project");
     }
 
     /**
      * Clone old task object form database and update all parameters from new task
-     * @param task object
+     * @param newTask object
      * @param id task id
      */
     @Override
-    public void updateTask(Task task, Long id) {
-        Task t=taskDatabase.findById(id).orElseThrow(TaskNotFindException::new);
-        t.setName(task.getName());
-        t.setPriority(task.getPriority());
-        t.setDescription(task.getDescription());
-        t.setStatus(task.getStatus());
-        taskDatabase.save(t);
-
+    public void updateTask(Task newTask, Long id) {
+        Task oldTask=taskDatabase.findById(id).orElseThrow(TaskNotFindException::new);
+        oldTask.setName(newTask.getName());
+        oldTask.setPriority(newTask.getPriority());
+        oldTask.setDescription(newTask.getDescription());
+        oldTask.setStatus(newTask.getStatus());
+        taskDatabase.save(oldTask);
+        log.info("IN updateTask - successfully updated old task");
     }
 
     /**
@@ -197,5 +208,6 @@ public class ServiceRepositoryImp implements ServiceRepository {
         Project p =projectDatabase.findById(id).orElseThrow(ProjectNotFindException::new);
         p.addTask(task);
         projectDatabase.save(p);
+        log.info("IN createTaskAndAssignToProject - successfully assigned to projectId: {}, new task",id);
     }
 }

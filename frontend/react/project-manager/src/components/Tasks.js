@@ -20,8 +20,6 @@ class Tasks extends Component {
     }
 
     componentDidMount() {
-        
-        console.log(AuthenticationService.isAdminLoggedIn())
         axios
             .get(`${API_URL}/api/task`,
             { headers: { Authorization: sessionStorage.getItem('token') } }
@@ -33,8 +31,15 @@ class Tasks extends Component {
                 })
             })
             .catch(function (error) {
+                console.log("--error--"+error)
                 if (error.status==="undefined" && !isUserLoggedIn){
                     alert("You are not authorized to access this page");
+                    history.push(`/login`)
+                    window.location.reload()
+                }
+                if(error.message==="Request failed with status code 500" && isUserLoggedIn){
+                    alert("Your session time is expired");
+                    AuthenticationService.logout();
                     history.push(`/login`)
                     window.location.reload()
                 }
@@ -89,7 +94,6 @@ class Tasks extends Component {
                 this.setState({
                     projects: res.data
                 })
-
             })
             .catch(function (error) {
                 if (error.status==="undefined" && !isUserLoggedIn){

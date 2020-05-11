@@ -24,7 +24,6 @@ class Projects extends Component {
     }
 
     componentDidMount() {
-        console.log(AuthenticationService.isAdminLoggedIn())
         axios.get(`${API_URL}/api/project`,
             { headers: { Authorization: sessionStorage.getItem('token') } }
         ).then(res => {
@@ -34,8 +33,15 @@ class Projects extends Component {
             })
         })
         .catch(function (error) {
+            console.log("--error--"+JSON.stringify(error))  
             if (error.status==="undefined" && !isUserLoggedIn){
                 alert("You are not authorized to access this page");
+                history.push(`/login`)
+                window.location.reload()
+            }
+            if(error.message==="Request failed with status code 500" && isUserLoggedIn){
+                alert("Your session time is expired");
+                AuthenticationService.logout();
                 history.push(`/login`)
                 window.location.reload()
             }
@@ -48,7 +54,6 @@ class Projects extends Component {
         { headers: { Authorization: sessionStorage.getItem('token') } }
         )
             .then(res => {
-                console.log("find---"+res.data)
                 this.setState({
                     projects: res.data
                 })

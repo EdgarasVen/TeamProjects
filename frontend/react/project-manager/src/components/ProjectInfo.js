@@ -37,6 +37,12 @@ class Project extends Component {
                     history.push(`/login`)
                     window.location.reload()
                 }
+                if(error.message==="Request failed with status code 500" && isUserLoggedIn){
+                    alert("Your session time is expired");
+                    AuthenticationService.logout();
+                    history.push(`/login`)
+                    window.location.reload()
+                }
               })
             
     }

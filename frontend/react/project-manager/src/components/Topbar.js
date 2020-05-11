@@ -6,7 +6,6 @@ import {
 } from "react-router-dom";
 
 const isUserLoggedIn = AuthenticationService.isUserLoggedIn();
-const isAdminLoggedIn = AuthenticationService.isAdminLoggedIn();
 
 function Sidebar() {
   return (

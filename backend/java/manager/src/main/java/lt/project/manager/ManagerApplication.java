@@ -1,17 +1,22 @@
 package lt.project.manager;
 
+import lt.project.manager.dto.UserDto;
 import lt.project.manager.enums.Priority;
 import lt.project.manager.enums.Status;
 import lt.project.manager.model.Project;
+import lt.project.manager.model.Role;
 import lt.project.manager.model.Task;
-import lt.project.manager.repo.RepoProject;
-import lt.project.manager.repo.RepoTask;
+import lt.project.manager.model.User;
 import lt.project.manager.service.ServiceRepository;
+import lt.project.manager.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Lazy;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
+
+import java.util.Date;
 
 @EnableSwagger2
 @SpringBootApplication
@@ -19,6 +24,13 @@ public class ManagerApplication implements CommandLineRunner {
 
 	@Autowired
 	ServiceRepository repository;
+
+	UserService service;
+
+	@Autowired
+	public void setService( @Lazy UserService service){
+		this.service = service;
+	}
 
 	public static void main(String[] args) {
 		SpringApplication.run(ManagerApplication.class, args);
@@ -40,6 +52,37 @@ public class ManagerApplication implements CommandLineRunner {
 		repository.createProject(p1);
 		repository.createProject(p2);
 		repository.createProject(p3);*/
+
+		Role role1= new Role();
+		role1.setName("ADMIN");
+		role1.setStatus(Status.ACTIVE);
+		role1.setCreated(new Date());
+
+		Role role2= new Role();
+		role2.setName("USER");
+		role2.setStatus(Status.ACTIVE);
+		role2.setCreated(new Date());
+
+		service.createRole(role1);
+		service.createRole(role2);
+
+		User user1=new User();
+		user1.setCreated(new Date());
+		user1.setUsername("admin");
+		user1.setFirstName("Aleksej");
+		user1.setLastName("Volodovich");
+		user1.setEmail("some@email.com");
+		user1.setPassword("admin");
+		service.register(user1,"ADMIN");
+
+		User user2=new User();
+		user2.setCreated(new Date());
+		user2.setUsername("user");
+		user2.setFirstName("Vladimir");
+		user2.setLastName("Micha");
+		user2.setEmail("some@email.com");
+		user2.setPassword("user");
+		service.register(user2,"USER");
 
 		for (int i = 1; i < 20; i++) {
 			Project p = new Project("Project  "+i,

@@ -1,18 +1,16 @@
-package lt.project.manager.service;
+package lt.project.manager.service.imp;
 
 import lombok.extern.slf4j.Slf4j;
 import lt.project.manager.exceptions.ProjectNotFindException;
 import lt.project.manager.exceptions.TaskNotFindException;
-import lt.project.manager.model.Project;
-import lt.project.manager.model.Task;
+import lt.project.manager.model.*;
 import lt.project.manager.repo.RepoProject;
 import lt.project.manager.repo.RepoTask;
+import lt.project.manager.service.ServiceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
@@ -27,14 +25,18 @@ import java.util.stream.Collectors;
 @Slf4j
 public class ServiceRepositoryImp implements ServiceRepository {
 
-    @Autowired
-    RepoProject projectDatabase;
+    private final RepoProject projectDatabase;
+    private final RepoTask taskDatabase;
 
     @Autowired
-    RepoTask taskDatabase;
+    public ServiceRepositoryImp(
+                                RepoProject projectDatabase,
+                                RepoTask taskDatabase) {
+        this.taskDatabase = taskDatabase;
+        this.projectDatabase = projectDatabase;
+    }
 
     /**
-     *
      * @return list of projects
      */
     @Override
@@ -44,7 +46,6 @@ public class ServiceRepositoryImp implements ServiceRepository {
     }
 
     /**
-     *
      * @return list of tasks
      */
     @Override
@@ -54,7 +55,6 @@ public class ServiceRepositoryImp implements ServiceRepository {
     }
 
     /**
-     *
      * @param name project name
      * @return project with same name
      */
@@ -65,7 +65,6 @@ public class ServiceRepositoryImp implements ServiceRepository {
     }
 
     /**
-     *
      * @param id task id
      * @return task with same id or throws task not find exception
      * @see TaskNotFindException
@@ -78,7 +77,6 @@ public class ServiceRepositoryImp implements ServiceRepository {
     }
 
     /**
-     *
      * @param name task name
      * @return task with same name
      */
@@ -89,7 +87,6 @@ public class ServiceRepositoryImp implements ServiceRepository {
     }
 
     /**
-     *
      * @param id project id
      * @return project with this id
      */
@@ -100,7 +97,6 @@ public class ServiceRepositoryImp implements ServiceRepository {
     }
 
     /**
-     *
      * @param string to find in project list
      * @return projects with similarities
      */
@@ -114,7 +110,6 @@ public class ServiceRepositoryImp implements ServiceRepository {
     }
 
     /**
-     *
      * @param string name of task
      * @return list of task
      */
@@ -210,4 +205,6 @@ public class ServiceRepositoryImp implements ServiceRepository {
         projectDatabase.save(p);
         log.info("IN createTaskAndAssignToProject - successfully assigned to projectId: {}, new task",id);
     }
+
+
 }

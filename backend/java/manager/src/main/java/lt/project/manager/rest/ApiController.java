@@ -1,17 +1,17 @@
-package lt.project.manager.controller;
+package lt.project.manager.rest;
 
 import lt.project.manager.model.Project;
 import lt.project.manager.model.Task;
 import lt.project.manager.service.ServiceRepository;
-import lt.project.manager.transfer.TransferProject;
-import lt.project.manager.transfer.TransferTask;
+import lt.project.manager.dto.TransferProject;
+import lt.project.manager.dto.TransferTask;
 
+import lt.project.manager.service.imp.ServiceRepositoryImp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
-import java.util.Optional;
 
 
 /**
@@ -28,7 +28,7 @@ public class ApiController {
     /**
      *
      * repository interface for service implementation
-     * @see lt.project.manager.service.ServiceRepositoryImp
+     * @see ServiceRepositoryImp
      */
     @Autowired
     public ServiceRepository repository;

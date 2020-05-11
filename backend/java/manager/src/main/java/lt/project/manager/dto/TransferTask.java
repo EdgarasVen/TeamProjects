@@ -1,4 +1,4 @@
-package lt.project.manager.transfer;
+package lt.project.manager.dto;
 
 import lombok.Data;
 import lombok.Getter;

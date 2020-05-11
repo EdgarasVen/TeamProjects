@@ -1,6 +1,5 @@
-package lt.project.manager.transfer;
+package lt.project.manager.dto;
 
-import javafx.scene.input.DataFormat;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;

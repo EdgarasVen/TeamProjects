@@ -1,13 +1,8 @@
 package lt.project.manager.enums;
 
 /**
- * Enum class with statuses:
- *     DONE,
- *     INPROGRESS,
- *     WAITING,
- *     FINISHED,
- *     ONGOING
- *     to choose
+ * Enumeration that represents status of objects:
+ *     - ACTIVE, DELETED, etc.
  * @author  IT Crew
  * @version 1.0
  *
@@ -18,5 +13,8 @@ public enum Status {
     INPROGRESS,
     WAITING,
     FINISHED,
-    ONGOING
+    ONGOING,
+    ACTIVE,
+    NOT_ACTIVE,
+    DELETED
 }

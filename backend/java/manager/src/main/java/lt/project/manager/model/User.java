@@ -44,6 +44,6 @@ public class User extends BaseEntity {
     private List<Role> roles;
 
     public String getRoleName(){
-        return roles.stream().findFirst().get().getName();
+        return roles.stream().findFirst().get().getName().toLowerCase().substring(5);
     }
 }

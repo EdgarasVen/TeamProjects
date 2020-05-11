@@ -20,6 +20,8 @@ class Tasks extends Component {
     }
 
     componentDidMount() {
+        
+        console.log(AuthenticationService.isAdminLoggedIn())
         axios
             .get(`${API_URL}/api/task`,
             { headers: { Authorization: sessionStorage.getItem('token') } }
@@ -139,7 +141,7 @@ class Tasks extends Component {
                         <div className="container-fluid ">
 
                             <div className="card shadow mb-4">
-                                <table className="table ">
+                                <table className="table table-hover">
                                     <thead>
                                         <tr>
                                             <th scope="col">Id</th>

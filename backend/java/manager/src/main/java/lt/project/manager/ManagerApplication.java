@@ -54,12 +54,12 @@ public class ManagerApplication implements CommandLineRunner {
 		repository.createProject(p3);*/
 
 		Role role1= new Role();
-		role1.setName("ADMIN");
+		role1.setName("ROLE_ADMIN");
 		role1.setStatus(Status.ACTIVE);
 		role1.setCreated(new Date());
 
 		Role role2= new Role();
-		role2.setName("USER");
+		role2.setName("ROLE_USER");
 		role2.setStatus(Status.ACTIVE);
 		role2.setCreated(new Date());
 
@@ -73,7 +73,7 @@ public class ManagerApplication implements CommandLineRunner {
 		user1.setLastName("Volodovich");
 		user1.setEmail("some@email.com");
 		user1.setPassword("admin");
-		service.register(user1,"ADMIN");
+		service.register(user1,"ROLE_ADMIN");
 
 		User user2=new User();
 		user2.setCreated(new Date());
@@ -82,7 +82,7 @@ public class ManagerApplication implements CommandLineRunner {
 		user2.setLastName("Micha");
 		user2.setEmail("some@email.com");
 		user2.setPassword("user");
-		service.register(user2,"USER");
+		service.register(user2,"ROLE_USER");
 
 		for (int i = 1; i < 20; i++) {
 			Project p = new Project("Project  "+i,

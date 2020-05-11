@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import history from './login/History';
 import AuthenticationService from './fetch/FetchService';
+
 const isUserLoggedIn = AuthenticationService.isUserLoggedIn();
 
 class Header extends Component {

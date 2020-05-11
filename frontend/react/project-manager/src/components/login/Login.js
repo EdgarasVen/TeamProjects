@@ -21,7 +21,9 @@ class Header extends Component {
         AutService
             .executeJwtAuthenticationService(this.state.name, this.state.password)
             .then((res) => {
+                console.log("login--"+res.data.roles)
                 AutService.registerJwtTT(res.data.token)
+                AutService.registerUserRole(res.data.roles)
                 history.push(`/projects`)
                 window.location.reload()
             }).catch(() => {

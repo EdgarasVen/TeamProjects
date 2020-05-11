@@ -6,8 +6,9 @@ import {
 } from "react-router-dom";
 import history from './login/History';
 import AuthenticationService from './fetch/FetchService';
-const isUserLoggedIn = AuthenticationService.isUserLoggedIn();
 
+const isUserLoggedIn = AuthenticationService.isUserLoggedIn();
+const isAdminLoggedIn = AuthenticationService.isAdminLoggedIn();
 
 class Project extends Component {
 
@@ -61,7 +62,7 @@ class Project extends Component {
     }
 
     Submit = () => {
-        axios.delete(`http://localhost:8080/api/project/${this.props.id}`,
+        axios.delete(`http://localhost:8080/api/v1/admin/project/${this.props.id}`,
         { headers: { Authorization: sessionStorage.getItem('token') } }
         )
             .then(res => {
@@ -95,7 +96,7 @@ class Project extends Component {
                                 <p className="card-text" key="5">Tasks count : {project.taskSize}</p>
 
                                 
-
+                                {isAdminLoggedIn && <div>
                                 <Link className="btn btn-outline-info btn-sm" to={`/project/edit/${project.id}`}>Edit</Link>
                                 <Link className="btn btn-outline-info btn-sm" to={`/project/add/${project.id}`}>Add Task</Link>
                                 <button
@@ -103,6 +104,8 @@ class Project extends Component {
                                     type="button"
                                     className="btn btn-outline-danger btn-sm">
                                     Delete Project</button>
+                                    </div>}
+                                
                             </div>
                             <div >
                                 <table className="table ">

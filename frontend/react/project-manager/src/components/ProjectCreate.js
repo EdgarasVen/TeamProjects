@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import AuthenticationService from './fetch/FetchService';
 import history from './login/History';
+
 const isUserLoggedIn = AuthenticationService.isUserLoggedIn();
+const isAdminLoggedIn = AuthenticationService.isAdminLoggedIn();
 
 class Header extends Component {
 
@@ -15,25 +17,33 @@ class Header extends Component {
     }
   }
 
+  componentDidMount() {
+    if (!isAdminLoggedIn) {
+      alert("You are not authorized to access this page");
+      history.push("/login");
+      window.location.reload();
+    }
+
+  }
 
   Submit = () => {
-    axios.post(`http://localhost:8080/api/project`
-    , {
-      name: this.state.name,
-      description: this.state.description,
-      status: "WAITING"
-    },
-    { headers: { Authorization: sessionStorage.getItem('token') } }
+    axios.post(`http://localhost:8080/api/v1/admin/project`
+      , {
+        name: this.state.name,
+        description: this.state.description,
+        status: "WAITING"
+      },
+      { headers: { Authorization: sessionStorage.getItem('token') } }
     )
       .then(res => {
         this.props.history.push(`/projects`);
       })
       .catch(function (error) {
         console.log(error.status)
-        if (error.status==="undefined" && !isUserLoggedIn){
-            alert("You are not authorized to access this page");
-            history.push(`/login`)
-            window.location.reload()
+        if (error.status === "undefined" && !isUserLoggedIn) {
+          alert("You are not authorized to access this page");
+          history.push(`/login`)
+          window.location.reload()
         }
       })
   }
@@ -73,22 +83,6 @@ class Header extends Component {
             onChange={this.handleChange}
           />
         </div>
-        {/* status 
-                <div className="input-group mb-3">
-                  <div className="input-group-prepend">
-                    <span className="input-group-text" id="basic-addon3">Status</span>
-                  </div>
-                  <select
-                    name="status"
-                    className="form-control"
-                    value={this.state.status}
-                    onChange={this.handleChange}
-                  >
-                    <option selected>Choose...</option>
-                    <option value="INPROGRESS">INPROGRESS</option>
-                    <option value="DONE">DONE</option>
-                  </select>
-                </div> */}
 
         <button
           onClick={this.Submit}

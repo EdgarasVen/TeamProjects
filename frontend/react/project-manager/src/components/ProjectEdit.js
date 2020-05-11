@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import history from './login/History';
 import AuthenticationService from './fetch/FetchService';
+
 const isUserLoggedIn = AuthenticationService.isUserLoggedIn();
+const isAdminLoggedIn = AuthenticationService.isAdminLoggedIn();
 
 class Header extends Component {
 
@@ -17,9 +19,15 @@ class Header extends Component {
   }
 
   componentDidMount() {
+    if (!isAdminLoggedIn) {
+      alert("You are not authorized to access this page");
+      history.push("/login");
+      window.location.reload();
+    }
+
     axios
       .get(`http://localhost:8080/api/project/id/${this.props.id}`,
-      { headers: { Authorization: sessionStorage.getItem('token') } }
+        { headers: { Authorization: sessionStorage.getItem('token') } }
       )
       .then(res => {
         this.setState({
@@ -30,30 +38,30 @@ class Header extends Component {
         })
       })
       .catch(function (error) {
-        if (error.status==="undefined" && !isUserLoggedIn){
-            alert("You are not authorized to access this page");
-            history.push(`/login`)
-            window.location.reload()
+        if (error.status === "undefined" && !isUserLoggedIn) {
+          alert("You are not authorized to access this page");
+          history.push(`/login`)
+          window.location.reload()
         }
       })
   }
 
   Submit = () => {
-    axios.put(`http://localhost:8080/api/project/${this.props.id}`
-    , {
-      name: this.state.name,
-      description: this.state.description,
-      status: this.state.status
-    },
-    { headers: { Authorization: sessionStorage.getItem('token') } })
+    axios.put(`http://localhost:8080/api/v1/admin/project/${this.props.id}`
+      , {
+        name: this.state.name,
+        description: this.state.description,
+        status: this.state.status
+      },
+      { headers: { Authorization: sessionStorage.getItem('token') } })
       .then(res => {
         this.props.history.push(`/projects`);
       })
       .catch(function (error) {
-        if (error.status==="undefined" && !isUserLoggedIn){
-            alert("You are not authorized to access this page");
-            history.push(`/login`)
-            window.location.reload()
+        if (error.status === "undefined" && !isUserLoggedIn) {
+          alert("You are not authorized to access this page");
+          history.push(`/login`)
+          window.location.reload()
         }
       })
   }

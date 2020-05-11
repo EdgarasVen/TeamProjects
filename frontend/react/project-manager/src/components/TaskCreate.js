@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import history from './login/History';
 import AuthenticationService from './fetch/FetchService';
-const isUserLoggedIn = AuthenticationService.isUserLoggedIn();
 
+const isUserLoggedIn = AuthenticationService.isUserLoggedIn();
+const isAdminLoggedIn = AuthenticationService.isAdminLoggedIn();
 
 class Header extends Component {
 
@@ -17,25 +18,32 @@ class Header extends Component {
     }
   }
 
+  componentDidMount() {
+    if (!isAdminLoggedIn) {
+      alert("You are not authorized to access this page");
+      history.push("/login");
+      window.location.reload();
+    }
+  }
 
   Submit = () => {
-    axios.put(`http://localhost:8080/api/assign/${this.props.id}`
-    , {
-      name: this.state.name,
-      priority: this.state.priority,
-      status: this.state.status,
-      description: this.state.description
-    },
-    { headers: { Authorization: sessionStorage.getItem('token') } }
+    axios.put(`http://localhost:8080/api/v1/admin/assign/${this.props.id}`
+      , {
+        name: this.state.name,
+        priority: this.state.priority,
+        status: this.state.status,
+        description: this.state.description
+      },
+      { headers: { Authorization: sessionStorage.getItem('token') } }
     )
       .then(res => {
         this.props.history.goBack();
       })
       .catch(function (error) {
-        if (error.status==="undefined" && !isUserLoggedIn){
-            alert("You are not authorized to access this page");
-            history.push(`/login`)
-            window.location.reload()
+        if (error.status === "undefined" && !isUserLoggedIn) {
+          alert("You are not authorized to access this page");
+          history.push(`/login`)
+          window.location.reload()
         }
       })
   }

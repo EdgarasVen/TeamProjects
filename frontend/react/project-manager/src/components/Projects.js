@@ -2,12 +2,15 @@ import React, { Component } from 'react';
 import Card from './ProjectCard';
 import history from './login/History';
 import AuthenticationService from './fetch/FetchService';
+import {
+    Link
+} from "react-router-dom";
 
 import axios from 'axios';
 
 const API_URL = 'http://localhost:8080';
 const isUserLoggedIn = AuthenticationService.isUserLoggedIn();
-
+const isAdminLoggedIn = AuthenticationService.isAdminLoggedIn();
 
 class Projects extends Component {
 
@@ -21,6 +24,7 @@ class Projects extends Component {
     }
 
     componentDidMount() {
+        console.log(AuthenticationService.isAdminLoggedIn())
         axios.get(`${API_URL}/api/project`,
             { headers: { Authorization: sessionStorage.getItem('token') } }
         ).then(res => {
@@ -44,6 +48,7 @@ class Projects extends Component {
         { headers: { Authorization: sessionStorage.getItem('token') } }
         )
             .then(res => {
+                console.log("find---"+res.data)
                 this.setState({
                     projects: res.data
                 })
@@ -93,6 +98,7 @@ class Projects extends Component {
                                     type="button">
                                     <i className="fas fa-search fa-sm"></i>
                                 </button>
+                                {isAdminLoggedIn && <Link className="btn btn-sm " to="/create">Create new project</Link>}
                             </div>
                         </div>
                     </form>
@@ -102,7 +108,7 @@ class Projects extends Component {
                         <div className="container-fluid ">
 
                             <div className="card shadow mb-4">
-                                <table className="table ">
+                                <table className="table table-hover">
                                     <thead>
                                         <tr>
                                             <th scope="col">Id</th>

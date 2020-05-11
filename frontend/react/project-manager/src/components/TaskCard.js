@@ -5,13 +5,14 @@ import {
 } from "react-router-dom";
 import history from './login/History';
 import AuthenticationService from './fetch/FetchService';
-const isUserLoggedIn = AuthenticationService.isUserLoggedIn();
 
+const isUserLoggedIn = AuthenticationService.isUserLoggedIn();
+const isAdminLoggedIn = AuthenticationService.isAdminLoggedIn();
 
 class Card extends Component {
 
     Submit = () => {
-        axios.delete(`http://localhost:8080/api/task/${this.props.id}`,
+        axios.delete(`http://localhost:8080/api/v1/admin/task/${this.props.id}`,
         { headers: { Authorization: sessionStorage.getItem('token') } }
         )
             .then(res => {
@@ -37,7 +38,8 @@ class Card extends Component {
                 <td>{this.props.status}</td>
                 <td>
                     <Link className="btn btn-sm btn-outline-info" to={`/task/edit/${this.props.id}`}>Edit Task</Link>
-                    <button className="btn btn-sm btn-outline-danger" onClick={this.Submit}>DELETE</button>
+
+                    {isAdminLoggedIn && <button className="btn btn-sm btn-outline-danger" onClick={this.Submit}>DELETE</button>}
                 </td>
             </tr>
         );

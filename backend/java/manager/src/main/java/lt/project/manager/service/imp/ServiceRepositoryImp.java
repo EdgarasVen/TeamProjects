@@ -102,11 +102,13 @@ public class ServiceRepositoryImp implements ServiceRepository {
      */
     @Override
     public List<Project> searchProjectByString(String string) {
-        List<Project> list = projectDatabase.findAll();
-        log.info("IN searchProjectByString - projects find by string: {} , projects find size: {}",string, list.size());
-        return list.stream()
+        List<Project> list = projectDatabase.findAll().stream()
                 .filter(project -> project.getName().contains(string))
                 .collect(Collectors.toList());
+        if(projectDatabase.findByName(string) != null)
+        list.add(projectDatabase.findByName(string));
+        log.info("IN searchProjectByString - projects find by string: {} , projects find size: {}",string, list.size());
+        return list;
     }
 
     /**
@@ -115,11 +117,12 @@ public class ServiceRepositoryImp implements ServiceRepository {
      */
     @Override
     public List<Task> searchTaskByString(String string) {
-        List<Task> list = taskDatabase.findAll();
-        log.info("IN searchTaskByString - tasks find by string: {} , tasks find size: {}",string, list.size());
-        return list.stream()
+        List<Task> list = taskDatabase.findAll().stream()
                 .filter(task -> task.getName().contains(string))
                 .collect(Collectors.toList());
+        list.add(taskDatabase.findByName(string));
+        log.info("IN searchTaskByString - tasks find by string: {} , tasks find size: {}",string, list.size());
+        return list;
     }
 
     /**

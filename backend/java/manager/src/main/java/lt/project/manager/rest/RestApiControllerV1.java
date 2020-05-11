@@ -22,13 +22,14 @@ import java.util.List;
  * @version 1.0
  *
  */
+
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
-public class ApiController {
+public class RestApiControllerV1 {
+
     /**
-     *
-     * repository interface for service implementation
-     * @see ServiceRepositoryImp
+     *  repository interface for service implementation
+     *  @see ServiceRepositoryImp
      */
     @Autowired
     public ServiceRepository repository;
@@ -110,49 +111,6 @@ public class ApiController {
         return repository.searchTaskByString(name);
     }
 
-
-    /**
-     * DELETE api method
-     * Delete project by id
-     * @param id project id
-     */
-    @DeleteMapping("api/project/{id}")
-    public void deleteProjectById(@PathVariable Long id){
-        repository.deleteProjectById(id);
-    }
-
-    /**
-     * DELETE api method
-     * Delete task by id
-     * @param id task id
-     */
-    @DeleteMapping("api/task/{id}")
-    public void deleteTaskById(@PathVariable Long id){
-        repository.deleteTaskById(id);
-    }
-
-    /**
-     * POST api method
-     * Accepts transfer object, creates Project and put into database
-     * @see TransferProject
-     * @param project transfer object
-     */
-    @PostMapping("/api/project")
-    public void createNewProject(@RequestBody final @Valid TransferProject project){
-        repository.createProject(project.build());
-    }
-
-    /**
-     * PUT api method
-     * Accepts transfer project object and project id , updates Project Object
-     * @param project transfer object
-     * @param id project id
-     */
-    @PutMapping("/api/project/{id}")
-    public void updateProject(@RequestBody final @Valid TransferProject project,@PathVariable Long id) {
-        repository.updateProject(project.build(), id);
-    }
-
     /**
      * PUT api method
      * Accepts transfer task object and task id , updates Task Object
@@ -164,15 +122,5 @@ public class ApiController {
         repository.updateTask(task.build(), id);
     }
 
-    /**
-     * PUT api method
-     * Accepts transfer task object and project id , creates task and assign it to some project
-     * @param projectId project id
-     * @param task transfer object
-     */
-    @PutMapping("/api/assign/{projectId}")
-    public void addTaskToProject(@PathVariable Long projectId ,@RequestBody final @Valid TransferTask task){
-        repository.createTaskAndAssignToProject(task.build(), projectId);
-    }
 
 }

@@ -11,7 +11,7 @@ import java.util.Date;
 /**
  * Spring Security wrapper for class {@link User}.
  *
- * @author Eugene Suleimanov
+ * @author Edgaras Venzlauskas
  * @version 1.0
  */
 

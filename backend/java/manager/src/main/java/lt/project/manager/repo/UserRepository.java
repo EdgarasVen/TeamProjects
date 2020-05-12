@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 /**
  * Repository interface that extends {@link JpaRepository} for class {@link User}.
  *
- * @author Eugene Suleimanov
+ * @author Edgaras Venzlauskas
  * @version 1.0
  */
 

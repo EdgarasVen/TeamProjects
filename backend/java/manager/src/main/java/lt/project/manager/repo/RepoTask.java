@@ -9,7 +9,7 @@ import java.util.Optional;
 
 /**
  * Jpa database interface
- * @author  IT Crew
+ * @author  Edgaras Venzlauskas
  * @version 1.0
  *
  */

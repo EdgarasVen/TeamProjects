@@ -8,7 +8,7 @@ import java.util.Optional;
 
 /**
  * Repository interface
- * @author  IT Crew
+ * @author  Edgaras Venzlauskas
  * @version 1.0
  *
  */

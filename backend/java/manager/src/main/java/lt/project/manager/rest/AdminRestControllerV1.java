@@ -18,7 +18,7 @@ import java.util.List;
 /**
  * REST controller for ROLE_ADMIN requests.
  *
- * @author Eugene Suleimanov
+ * @author Edgaras Venzlauskas
  * @version 1.0
  */
 

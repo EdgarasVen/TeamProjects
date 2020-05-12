@@ -7,7 +7,7 @@ import lt.project.manager.model.User;
 /**
  * DTO class for user requests by ROLE_USER
  *
- * @author Eugene Suleimanov
+ * @author Edgaras Venzlauskas
  * @version 1.0
  */
 

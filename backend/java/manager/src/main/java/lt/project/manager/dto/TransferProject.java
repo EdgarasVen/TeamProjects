@@ -12,7 +12,7 @@ import javax.validation.constraints.NotNull;
 /**
  * Transfer object for project entity creation
  * @see Project
- * @author  IT Crew
+ * @author  Edgaras Venzlauskas
  * @version 1.0
  *
  */

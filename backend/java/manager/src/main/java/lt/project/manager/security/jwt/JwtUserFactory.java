@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 /**
  * Implementation of Factory Method for class {@link JwtUser}.
  *
- * @author Eugene Suleimanov
+ * @author Edgaras Venzlauskas
  * @version 1.0
  */
 

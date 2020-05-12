@@ -3,7 +3,7 @@ package lt.project.manager.enums;
 /**
  * Enumeration that represents status of objects:
  *     - ACTIVE, DELETED, etc.
- * @author  IT Crew
+ * @author  Edgaras Venzlauskas
  * @version 1.0
  *
  */

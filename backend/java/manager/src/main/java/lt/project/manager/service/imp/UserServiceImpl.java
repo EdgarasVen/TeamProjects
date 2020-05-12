@@ -18,7 +18,7 @@ import java.util.List;
  * Implementation of {@link UserService} interface.
  * Wrapper for {@link UserRepository} + business logic.
  *
- * @author Eugene Suleimanov
+ * @author Edgaras Venzlauskas
  * @version 1.0
  */
 

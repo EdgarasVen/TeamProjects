@@ -9,7 +9,7 @@ import java.util.*;
 /**
  * Class represents Project entity and PROJECT table.
  *
- * @author  IT Crew
+ * @author  Edgaras Venzlauskas
  * @version 1.0
  *
  */

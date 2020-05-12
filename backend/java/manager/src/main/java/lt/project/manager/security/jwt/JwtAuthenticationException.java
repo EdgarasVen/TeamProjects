@@ -5,7 +5,7 @@ import org.springframework.security.core.AuthenticationException;
 /**
  * Authetication exception for JwtAppDemo application.
  *
- * @author Eugene Suleimanov
+ * @author Edgaras Venzlauskas
  * @version 1.0
  */
 

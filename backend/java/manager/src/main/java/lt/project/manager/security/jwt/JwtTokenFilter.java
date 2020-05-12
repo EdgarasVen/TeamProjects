@@ -14,7 +14,7 @@ import java.io.IOException;
 /**
  * JWT token filter that handles all HTTP requests to application.
  *
- * @author Eugene Suliemanov
+ * @author Edgaras Venzlauskas
  * @version 1.0
  */
 

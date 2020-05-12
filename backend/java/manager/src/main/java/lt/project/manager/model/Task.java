@@ -15,7 +15,7 @@ import java.util.Date;
 /**
  * Class represents Task entity and TASK table.
  *
- * @author  IT Crew
+ * @author  Edgaras Venzlauskas
  * @version 1.0
  *
  */

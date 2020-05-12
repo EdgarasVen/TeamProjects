@@ -22,7 +22,7 @@ import java.util.List;
 /**
  * Util class that provides methods for generation, validation, etc. of JWT token.
  *
- * @author Eugene Suleimanov
+ * @author Edgaras Venzlauskas
  * @version 1.0
  */
 

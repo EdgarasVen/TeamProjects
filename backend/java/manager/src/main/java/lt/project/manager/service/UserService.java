@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * Service interface for class {@link User}.
  *
- * @author Eugene Suleimanov
+ * @author Edgaras Venzlauskas
  * @version 1.0
  */
 

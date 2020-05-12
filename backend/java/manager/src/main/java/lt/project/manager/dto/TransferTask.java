@@ -13,7 +13,7 @@ import javax.validation.constraints.NotNull;
 /**
  * Transfer object for Task entity creation
  * @see Task
- * @author  IT Crew
+ * @author  Edgaras Venzlauskas
  * @version 1.0
  *
  */

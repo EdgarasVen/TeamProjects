@@ -18,7 +18,7 @@ import java.util.List;
  *  Class represent api controller for restful application.
  *  Includes GET POST DELETE PUT methods
  *
- * @author  IT Crew
+ * @author  Edgaras Venzlauskas
  * @version 1.0
  *
  */

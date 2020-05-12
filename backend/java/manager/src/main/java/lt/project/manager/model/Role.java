@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * Simple domain object that represents application user's role - ADMIN, USER, etc.
  *
- * @author Eugene Suleimanov
+ * @author Edgaras Venzlauskas
  * @version 1.0
  */
 

@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 /**
  * Implementation of {@link UserDetailsService} interface for {@link JwtUser}.
  *
- * @author Eugene Suleimanov
+ * @author Edgaras Venzlauskas
  * @version 1.0
  */
 

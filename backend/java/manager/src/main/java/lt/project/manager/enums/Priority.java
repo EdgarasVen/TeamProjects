@@ -6,7 +6,7 @@ package lt.project.manager.enums;
  *     MEDIUM,
  *     HIGH
  *     to choose
- * @author  IT Crew
+ * @author  Edgaras Venzlauskas
  * @version 1.0
  *
  */

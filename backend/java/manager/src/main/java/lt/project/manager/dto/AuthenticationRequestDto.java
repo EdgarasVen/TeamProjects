@@ -5,7 +5,7 @@ import lombok.Data;
 /**
  * DTO class for authentication (login) request.
  *
- * @author Eugene Suleimanov
+ * @author Edgaras Venzlauskas
  * @version 1.0
  */
 

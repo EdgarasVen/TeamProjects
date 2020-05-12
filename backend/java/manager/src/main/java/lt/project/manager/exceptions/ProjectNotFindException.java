@@ -2,7 +2,7 @@ package lt.project.manager.exceptions;
 
 /**
  * Exception class for search if object not find
- * @author  IT Crew
+ * @author  Edgaras Venzlauskas
  * @version 1.0
  *
  */

@@ -16,7 +16,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 /**
  * Security configuration class for JWT based Spring Security application.
  *
- * @author Eugene Suleimanov
+ * @author Edgaras Venzlauskas
  * @version 1.0
  */
 

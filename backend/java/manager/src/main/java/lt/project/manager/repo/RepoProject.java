@@ -10,7 +10,7 @@ import java.util.List;
 
 /**
  * Jpa database interface
- * @author  IT Crew
+ * @author  Edgaras Venzlauskas
  * @version 1.0
  *
  */

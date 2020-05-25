@@ -1,5 +1,5 @@
 import React from 'react';
-import AuthenticationService from './fetch/FetchService'
+import AuthenticationService from '../fetch/FetchService'
 
 import {
   Link

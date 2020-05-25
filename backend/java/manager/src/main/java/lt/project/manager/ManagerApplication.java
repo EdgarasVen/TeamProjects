@@ -84,7 +84,7 @@ public class ManagerApplication implements CommandLineRunner {
 		user2.setPassword("user");
 		service.register(user2,"ROLE_USER");
 
-		for (int i = 1; i < 20; i++) {
+		for (int i = 1; i < 10000; i++) {
 			Project p = new Project("Project  "+i,
 					"Axios is promise-based and thus we can take " +
 							"advantage of async and await for more readable " +

@@ -1,5 +1,7 @@
 package lt.project.manager.rest;
 
+import lombok.extern.slf4j.Slf4j;
+import lt.project.manager.dto.TransferPagination;
 import lt.project.manager.model.Project;
 import lt.project.manager.model.Task;
 import lt.project.manager.service.ServiceRepository;
@@ -8,10 +10,14 @@ import lt.project.manager.dto.TransferTask;
 
 import lt.project.manager.service.imp.ServiceRepositoryImp;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -25,6 +31,7 @@ import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
+@Slf4j
 public class RestApiControllerV1 {
 
     /**
@@ -35,12 +42,19 @@ public class RestApiControllerV1 {
     public ServiceRepository repository;
 
     /**
-     * GET api method
-     * @return list of all projects
+     * POST api method
+     * @param pagination
+     * @see TransferPagination
+     * @return all projects
      */
-    @GetMapping("/api/project")
-    public List<Project> getAllProjects (){
-        return repository.getProjects();
+    @PostMapping("/api/project")
+    public ResponseEntity getAllProjects (
+            @RequestBody final TransferPagination pagination) {
+        Page<Project> projects = repository.getProjects(pagination.build());
+        Map<Object, Object> response = new HashMap<>();
+        response.put("projects",projects);
+        response.put("listSize",projects.getTotalPages());
+        return ResponseEntity.ok(response);
     }
 
     /**
@@ -73,12 +87,19 @@ public class RestApiControllerV1 {
     }
 
     /**
-     * GET api method
-     * @return list of all tasks
+     * POST api method
+     * @param pagination
+     * @see TransferPagination
+     * @return all tasks
      */
-    @GetMapping("/api/task")
-    public List<Task> getAllTasks(){
-        return repository.getTasks();
+    @PostMapping("/api/task")
+    public ResponseEntity getAllTasks(
+            @RequestBody final TransferPagination pagination){
+        Page<Task> tasks = repository.getTasks(pagination.build());
+        Map<Object, Object> response = new HashMap<>();
+        response.put("tasks",tasks);
+        response.put("listSize",tasks.getTotalPages());
+        return ResponseEntity.ok(response);
     }
 
     /**

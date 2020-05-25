@@ -8,6 +8,8 @@ import lt.project.manager.repo.RepoProject;
 import lt.project.manager.repo.RepoTask;
 import lt.project.manager.service.ServiceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -40,18 +42,18 @@ public class ServiceRepositoryImp implements ServiceRepository {
      * @return list of projects
      */
     @Override
-    public List<Project> getProjects() {
+    public Page<Project> getProjects(Pageable pageable) {
         log.info("IN getProjects - projects find");
-        return (List<Project>) projectDatabase.findAll();
+        return projectDatabase.findAll(pageable);
     }
 
     /**
      * @return list of tasks
      */
     @Override
-    public List<Task> getTasks() {
+    public Page<Task> getTasks(Pageable pageable) {
         log.info("IN getTasks - tasks find");
-        return (List<Task>) taskDatabase.findAll();
+        return taskDatabase.findAll(pageable);
     }
 
     /**

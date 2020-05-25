@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import history from './login/History';
-import AuthenticationService from './fetch/FetchService';
+import history from '../login/History';
+import AuthenticationService from '../fetch/FetchService';
 
 const isUserLoggedIn = AuthenticationService.isUserLoggedIn();
+const isAdminLoggedIn = AuthenticationService.isAdminLoggedIn();
 
 class Header extends Component {
 
@@ -13,61 +14,37 @@ class Header extends Component {
       name: '',
       priority: '',
       status: '',
-      description: '',
-      isFetching: false
+      description: ''
     }
   }
 
+  componentDidMount() {
+    if (!isAdminLoggedIn) {
+      alert("You are not authorized to access this page");
+      history.push("/login");
+      window.location.reload();
+    }
+  }
 
   Submit = () => {
-    axios.put(`http://localhost:8080/api/task/${this.props.id}`
-    , {
-      name: this.state.name,
-      priority: this.state.priority,
-      status: this.state.status,
-      description: this.state.description
-    },
-    { headers: { Authorization: sessionStorage.getItem('token') } }
+    axios.put(`http://localhost:8080/api/v1/admin/assign/${this.props.id}`
+      , {
+        name: this.state.name,
+        priority: this.state.priority,
+        status: this.state.status,
+        description: this.state.description
+      },
+      { headers: { Authorization: sessionStorage.getItem('token') } }
     )
       .then(res => {
         this.props.history.goBack();
       })
       .catch(function (error) {
-        if (error.status==="undefined" && !isUserLoggedIn){
-            alert("You are not authorized to access this page");
-            history.push(`/login`)
-            window.location.reload()
-        }
-      })
-
-  }
-
-  componentDidMount() {
-    axios
-      .get(`http://localhost:8080/api/task/id/${this.props.id}`,
-      { headers: { Authorization: sessionStorage.getItem('token') } }
-      )
-      .then(res => {
-        this.setState({
-          name: res.data.name,
-          priority: res.data.priority,
-          status: res.data.status,
-          description: res.data.description,
-          isFetching: true,
-        })       
-      })
-      .catch(function (error) {
-        if (error.status==="undefined" && !isUserLoggedIn){
-            alert("You are not authorized to access this page");
-            history.push(`/login`)
-            window.location.reload()
-        }
-        if(error.message==="Request failed with status code 500" && isUserLoggedIn){
-          alert("Your session time is expired");
-          AuthenticationService.logout();
+        if (error.status === "undefined" && !isUserLoggedIn) {
+          alert("You are not authorized to access this page");
           history.push(`/login`)
           window.location.reload()
-      }
+        }
       })
   }
 
@@ -102,7 +79,7 @@ class Header extends Component {
             className="form-control"
             value={this.state.priority}
             onChange={this.handleChange}>
-            
+            <option >Choose...</option>
             <option value="LOW">LOW</option>
             <option value="MEDIUM">MEDIUM</option>
             <option value="HIGH">HIGH</option>
@@ -118,7 +95,7 @@ class Header extends Component {
             className="form-control"
             value={this.state.status}
             onChange={this.handleChange}>
-            
+            <option >Choose...</option>
             <option value="WAITING">WAITING</option>
             <option value="ONGOING">ONGOING</option>
             <option value="FINISHED">FINISHED</option>
@@ -143,7 +120,7 @@ class Header extends Component {
           onClick={this.Submit}
           type="button"
           className="btn btn-primary">
-          UPDATE</button>
+          Add task</button>
 
       </div>
     )

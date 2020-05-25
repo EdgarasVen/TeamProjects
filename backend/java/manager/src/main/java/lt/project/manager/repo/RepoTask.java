@@ -1,6 +1,8 @@
 package lt.project.manager.repo;
 
 import lt.project.manager.model.Task;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,6 +17,9 @@ import java.util.Optional;
  */
 
 public interface RepoTask extends JpaRepository<Task, Long> {
+
+    @Override
+    Page<Task> findAll(Pageable pageable);
 
     @Transactional
     Task findByName(String name);

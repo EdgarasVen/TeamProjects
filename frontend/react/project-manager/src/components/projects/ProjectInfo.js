@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import Card from "./TaskCard";
+import Card from "../tasks/TaskCard";
 import axios from 'axios';
 import {
     Link
 } from "react-router-dom";
-import history from './login/History';
-import AuthenticationService from './fetch/FetchService';
+import history from '../login/History';
+import AuthenticationService from '../fetch/FetchService';
 
 const isUserLoggedIn = AuthenticationService.isUserLoggedIn();
 const isAdminLoggedIn = AuthenticationService.isAdminLoggedIn();

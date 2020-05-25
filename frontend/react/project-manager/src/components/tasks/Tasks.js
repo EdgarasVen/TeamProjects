@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import Card from './TaskCard';
-import history from './login/History';
-import AuthenticationService from './fetch/FetchService';
+import history from '../login/History';
+import AuthenticationService from '../fetch/FetchService';
+
+import {CSVLink} from 'react-csv';
 
 import axios from 'axios';
 
@@ -15,80 +17,60 @@ class Tasks extends Component {
         this.state = {
             projects: [],
             name: '',
-            isFetching: false
+            isFetching: false,
+            page: 1,
+            size: 5,
+            listSize: 0,
+            headers : [
+                { label: "ID", key: "id" },
+                { label: "Task name", key: "name" },
+                { label: "Description", key: "description" },
+                { label: "Priority", key: "priority" },
+                { label: "Status", key: "status" },
+                { label: "Create date", key: "date" },
+                { label: "Assign to project", key: "projectN" },
+              ]
         }
     }
 
     componentDidMount() {
         axios
-            .get(`${API_URL}/api/task`,
-            { headers: { Authorization: sessionStorage.getItem('token') } }
+            .post(`${API_URL}/api/task`,
+                {
+                    pageNumber: this.state.page-1,
+                    pageSize: this.state.size
+                },
+                { headers: { Authorization: sessionStorage.getItem('token') } }
             )
             .then(res => {
+                console.log(res)
                 this.setState({
-                    projects: res.data,
+                    projects: res.data.tasks.content,
+                    listSize: res.data.listSize,
                     isFetching: true
                 })
             })
             .catch(function (error) {
-                console.log("--error--"+error)
-                if (error.status==="undefined" && !isUserLoggedIn){
+                console.log("--error--" + error)
+                if (error.status === "undefined" && !isUserLoggedIn) {
                     alert("You are not authorized to access this page");
                     history.push(`/login`)
                     window.location.reload()
                 }
-                if(error.message==="Request failed with status code 500" && isUserLoggedIn){
+                if (error.message === "Request failed with status code 500" && isUserLoggedIn) {
                     alert("Your session time is expired");
                     AuthenticationService.logout();
                     history.push(`/login`)
                     window.location.reload()
                 }
-              })
-    }
-
-    componentDidUpdate() {
-        axios
-            .get(`${API_URL}/api/task`,
-            { headers: { Authorization: sessionStorage.getItem('token') } }
-            )
-            .then(res => {
-                this.setState({
-                    projects: res.data,
-                    isFetching: true
-                })
             })
-            .catch(function (error) {
-                if (error.status==="undefined" && !isUserLoggedIn){
-                    alert("You are not authorized to access this page");
-                    history.push(`/login`)
-                    window.location.reload()
-                }
-              })
     }
 
 
-    Submit = (event) => {
-        event.preventDefault();
-
-        axios.get(`${API_URL}/api/project/name/${this.state.name}`,
-        { headers: { Authorization: sessionStorage.getItem('token') } }
-        )
-            .then(res => {
-                this.setState({ projects: res.data })
-            })
-            .catch(function (error) {
-                if (error.status==="undefined" && !isUserLoggedIn){
-                    alert("You are not authorized to access this page");
-                    history.push(`/login`)
-                    window.location.reload()
-                }
-              })
-
-    }
 
     Submit = (event) => {
         axios.get(`${API_URL}/api/task/search/${this.state.name}`,
-        { headers: { Authorization: sessionStorage.getItem('token') } }
+            { headers: { Authorization: sessionStorage.getItem('token') } }
         )
             .then(res => {
                 this.setState({
@@ -96,13 +78,45 @@ class Tasks extends Component {
                 })
             })
             .catch(function (error) {
-                if (error.status==="undefined" && !isUserLoggedIn){
+                if (error.status === "undefined" && !isUserLoggedIn) {
                     alert("You are not authorized to access this page");
                     history.push(`/login`)
                     window.location.reload()
                 }
-              })
+            })
 
+    }
+
+    Refresh = (event) => {
+        axios
+            .post(`${API_URL}/api/task`,
+                {
+                    pageNumber: this.state.page-1,
+                    pageSize: this.state.size
+                },
+                { headers: { Authorization: sessionStorage.getItem('token') } }
+            )
+            .then(res => {
+                this.setState({
+                    projects: res.data.tasks.content,
+                    listSize: res.data.listSize,
+                    isFetching: true
+                })
+            })
+            .catch(function (error) {
+                console.log("--error--" + error)
+                if (error.status === "undefined" && !isUserLoggedIn) {
+                    alert("You are not authorized to access this page");
+                    history.push(`/login`)
+                    window.location.reload()
+                }
+                if (error.message === "Request failed with status code 500" && isUserLoggedIn) {
+                    alert("Your session time is expired");
+                    AuthenticationService.logout();
+                    history.push(`/login`)
+                    window.location.reload()
+                }
+            })
     }
 
     handleChange = ({ target }) => {
@@ -110,7 +124,7 @@ class Tasks extends Component {
     };
 
     render() {
-        var { projects, isFetching } = this.state;
+        var { projects, isFetching, listSize,headers } = this.state;
         if (!isFetching) {
             return <div>Loading ....</div>
         }
@@ -138,8 +152,48 @@ class Tasks extends Component {
                                     <i className="fas fa-search fa-sm"></i>
                                 </button>
                             </div>
+                            <CSVLink 
+                                data={projects}
+                                headers={headers}
+                                filename={"tasks.csv"}
+                                className="btn btn-primary btn-sm" >
+                                    CSV
+                                </CSVLink>
                         </div>
                     </div>
+
+                    <nav aria-label="Page navigation example ">
+                        <ul className="pagination justify-content-end ">
+                            <div className="mt-1">Pages:{listSize} -</div>
+                            <li className="page-item">
+                                <input required
+                                    type="text"
+                                    className="form-control input-sm"
+                                    name="page"
+                                    size="4"
+                                    placeholder="Page #"
+                                    value={this.state.page}
+                                    onChange={this.handleChange}>
+                                </input></li>
+                            <div className="mt-1">Size</div>
+                            <li className="page-item mr-4">
+                                <input required
+                                    type="text"
+                                    className="form-control input-sm"
+                                    name="size"
+                                    size="4"
+                                    placeholder="Size #"
+                                    value={this.state.size}
+                                    onChange={this.handleChange}>
+                                </input></li>
+                            <li className="page-item mr-4">
+
+                                <button className="btn btn-primary btn-sm "
+                                    onClick={this.Refresh}>
+                                    <span >refresh</span>
+                                </button></li>
+                        </ul>
+                    </nav>
 
                     <div id="page-content-wrapper">
                         <div className="container-fluid ">

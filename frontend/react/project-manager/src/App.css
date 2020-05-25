@@ -2,18 +2,15 @@ h2 {
   text-align: center;
 }
 
-nav {
-  font-size: large;
-}
+* {
+  font-family: Arial;
+ }
 
-/*!
- * Start Bootstrap - Simple Sidebar (https://startbootstrap.com/template-overviews/simple-sidebar)
- * Copyright 2013-2019 Start Bootstrap
- * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap-simple-sidebar/blob/master/LICENSE)
- */
  body {
   overflow-x: hidden;
+  
 }
+
 
 #sidebar-wrapper {
   min-height: 100vh;
@@ -26,7 +23,6 @@ nav {
 
 #sidebar-wrapper .sidebar-heading {
   padding: 0.875rem 1.25rem;
-  font-size: 1.2rem;
 }
 
 #sidebar-wrapper .list-group {

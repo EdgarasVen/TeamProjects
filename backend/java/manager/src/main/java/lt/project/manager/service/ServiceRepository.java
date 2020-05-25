@@ -2,6 +2,8 @@ package lt.project.manager.service;
 
 import lt.project.manager.model.Project;
 import lt.project.manager.model.Task;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 import java.util.Optional;
@@ -16,8 +18,8 @@ import java.util.Optional;
 public interface ServiceRepository {
 
     //Get
-    List<Project> getProjects();
-    List<Task> getTasks();
+    Page<Project> getProjects(Pageable pageable);
+    Page<Task> getTasks(Pageable pageable);
     Project getProjectByName(String name);
     Task getTaskById(Long id);
     Task getTaskByName(String name);

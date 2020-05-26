@@ -6,6 +6,7 @@ import {
 } from "react-router-dom";
 
 const isUserLoggedIn = AuthenticationService.isUserLoggedIn();
+const isAdminLoggedIn = AuthenticationService.isAdminLoggedIn();
 
 function Sidebar() {
   return (
@@ -22,8 +23,12 @@ function Sidebar() {
           {isUserLoggedIn &&              
             <li className="nav-item " key="2">
               <Link className="btn btn-sm" to="/projects">Project list</Link></li>}
+              {isAdminLoggedIn && 
+              <li className="nav-item " key="3">
+              <Link className="btn btn-sm" to="/users">Users list</Link></li>
+              }
           {isUserLoggedIn &&
-          <li className="nav-item " key="3">
+          <li className="nav-item " key="4">
             <Link className="btn btn-sm" to="/tasks">Task list</Link>
           </li>}
         </ul>

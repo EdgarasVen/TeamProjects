@@ -8,8 +8,8 @@ class Header extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            name: 'admin',
-            password: 'admin',
+            name: '',
+            password: '',
             hasLoginFailed: false,
             showSuccessMessage: false
         }

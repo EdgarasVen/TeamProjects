@@ -26,7 +26,9 @@ public interface ServiceRepository {
     Project getProjectById(Long id);
     List<Project> searchProjectByString(String string);
     List<Task> searchTaskByString(String string);
-
+    List<Task> getTasksWaitingStatus(Long id);
+    List<Task> getTasksOngoingStatus(Long id);
+    List<Task> getTasksFinishedStatus(Long id);
 
     //Post
     void createProject(Project project);
@@ -40,6 +42,7 @@ public interface ServiceRepository {
     //Put
     void updateProject(Project newProject, Long id);
    	void updateTask(Task newTask, Long projectId);
+
 
 
 }

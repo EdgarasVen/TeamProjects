@@ -43,10 +43,12 @@ public class ManagerApplication implements CommandLineRunner {
 		Project p2 = new Project("Backend","Create back for UAB ", Status.WAITING);
 		Project p3 = new Project("asdasdaad","asdadsad for UAB ", Status.WAITING);
 
-		p1.addTask(new Task("Test", Priority.LOW,Status.WAITING));
-		p1.addTask(new Task("Start", Priority.MEDIUM,Status.WAITING));
-		p1.addTask(new Task("Stop", Priority.HIGH,Status.WAITING));
-
+		p1.addTask(new Task("Test", Priority.LOW,"Make tests for code",Status.ONGOING));
+		p1.addTask(new Task("RestApi", Priority.MEDIUM,"Write rest api",Status.WAITING));
+		p1.addTask(new Task("Design", Priority.HIGH,"Design UI",Status.FINISHED));
+		p2.addTask(new Task("Test", Priority.LOW,"Make tests for code",Status.ONGOING));
+		p2.addTask(new Task("RestApi", Priority.MEDIUM,"Write rest api",Status.ONGOING));
+		p3.addTask(new Task("Design", Priority.HIGH,"Design UI",Status.FINISHED));
 
 
 		repository.createProject(p1);
@@ -84,7 +86,7 @@ public class ManagerApplication implements CommandLineRunner {
 		user2.setPassword("user");
 		service.register(user2,"ROLE_USER");
 
-		for (int i = 1; i < 10000; i++) {
+		for (int i = 1; i < 1000000; i++) {
 			Project p = new Project("Project  "+i,
 					"Axios is promise-based and thus we can take " +
 							"advantage of async and await for more readable " +

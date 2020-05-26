@@ -4,6 +4,9 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 import lt.project.manager.model.User;
 
+import javax.jws.soap.SOAPBinding;
+import java.util.Date;
+
 /**
  * DTO class for user requests by ROLE_USER
  *
@@ -19,15 +22,17 @@ public class UserDto {
     private String firstName;
     private String lastName;
     private String email;
+    private String password;
 
     public User toUser(){
         User user = new User();
         user.setId(id);
+        user.setCreated(new Date());
         user.setUsername(username);
         user.setFirstName(firstName);
         user.setLastName(lastName);
         user.setEmail(email);
-
+        user.setPassword(password);
         return user;
     }
 

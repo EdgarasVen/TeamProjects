@@ -10,6 +10,8 @@ import Tasks from '../tasks/Tasks';
 import TaskCreate from '../tasks/TaskCreateWrapper';
 import TaskEdit from '../tasks/TaskEditWrapper';
 
+import CreateUser from '../users/UserCreateWrapper';
+import Users from '../users/Users';
 import Login from '../login/Login';
 
 import {
@@ -43,10 +45,15 @@ class Main extends Component {
                                 <Route path="/create/">
                                     <CreateProject />
                                 </Route>
+                                <Route path="/user/create">
+                                    <CreateUser />
+                                </Route>
                                 <Route path="/project/info/:id">
                                     <ProjectInfo />
                                 </Route>
-
+                                <Route path="/users">
+                                    <Users />
+                                </Route>
                                 <Route path="/project/add/:id">
                                     <TaskCreate />
                                 </Route>

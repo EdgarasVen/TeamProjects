@@ -1,6 +1,7 @@
 package lt.project.manager.service.imp;
 
 import lombok.extern.slf4j.Slf4j;
+import lt.project.manager.enums.Status;
 import lt.project.manager.exceptions.ProjectNotFindException;
 import lt.project.manager.exceptions.TaskNotFindException;
 import lt.project.manager.model.*;
@@ -124,6 +125,48 @@ public class ServiceRepositoryImp implements ServiceRepository {
                 .collect(Collectors.toList());
         list.add(taskDatabase.findByName(string));
         log.info("IN searchTaskByString - tasks find by string: {} , tasks find size: {}",string, list.size());
+        return list;
+    }
+
+    /**
+     * Find tasks with WAITING status
+     * @return list of tasks
+     */
+    @Override
+    public List<Task> getTasksWaitingStatus(Long id) {
+        Project project= projectDatabase.findById(id).orElseThrow(ProjectNotFindException::new);
+        List<Task> list=project.getTasks().stream()
+                .filter(task -> task.getStatus()== Status.WAITING)
+                .collect(Collectors.toList());;
+        log.info("IN getTasksWaitingStatus - tasks find size: {}", list.size());
+        return list;
+    }
+
+    /**
+     * Find tasks with ONGOING status
+     * @return list of tasks
+     */
+    @Override
+    public List<Task> getTasksOngoingStatus(Long id) {
+        Project project= projectDatabase.findById(id).orElseThrow(ProjectNotFindException::new);
+        List<Task> list=project.getTasks().stream()
+                .filter(task -> task.getStatus()== Status.ONGOING)
+                .collect(Collectors.toList());;
+        log.info("IN getTasksOngoingStatus - tasks find size: {}", list.size());
+        return list;
+    }
+
+    /**
+     * Find tasks with FINISHED status
+     * @return list of tasks
+     */
+    @Override
+    public List<Task> getTasksFinishedStatus(Long id) {
+        Project project= projectDatabase.findById(id).orElseThrow(ProjectNotFindException::new);
+        List<Task> list=project.getTasks().stream()
+                .filter(task -> task.getStatus()== Status.FINISHED)
+                .collect(Collectors.toList());;
+        log.info("IN getTasksFinishedStatus - tasks find size: {}", list.size());
         return list;
     }
 

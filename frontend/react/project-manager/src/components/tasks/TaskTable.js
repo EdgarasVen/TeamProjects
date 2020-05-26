@@ -17,6 +17,7 @@ class Card extends Component {
         )
             .then(res => {
                 this.props.history.push(`/tasks`);
+                
             })
             .catch(function (error) {
                 if (error.status==="undefined" && !isUserLoggedIn){

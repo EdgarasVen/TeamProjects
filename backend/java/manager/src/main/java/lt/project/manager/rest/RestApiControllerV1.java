@@ -102,6 +102,20 @@ public class RestApiControllerV1 {
         return ResponseEntity.ok(response);
     }
 
+    @GetMapping("api/task/waiting/{id}")
+    public List<Task> getTasksWaitingStatus(@PathVariable Long id){
+        return repository.getTasksWaitingStatus(id);
+    }
+
+    @GetMapping("api/task/ongoing/{id}")
+    public List<Task> getTasksOngoingStatus(@PathVariable Long id){
+        return repository.getTasksOngoingStatus(id);
+    }
+
+    @GetMapping("api/task/finished/{id}")
+    public List<Task> getTasksFinishedStatus(@PathVariable Long id){
+        return repository.getTasksFinishedStatus(id);
+    }
     /**
      * GET api method
      * @param id task id

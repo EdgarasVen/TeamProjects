@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Implementation of {@link UserService} interface.
@@ -63,6 +64,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<User> getAll() {
         List<User> result = userRepository.findAll();
+        result.remove(0);
         log.info("IN getAll - {} users found", result.size());
         return result;
     }

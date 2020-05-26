@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
+
 import axios from 'axios';
-import {
-    Link
-} from "react-router-dom";
 import history from '../login/History';
 import AuthenticationService from '../fetch/FetchService';
 
@@ -12,11 +10,11 @@ const isAdminLoggedIn = AuthenticationService.isAdminLoggedIn();
 class Card extends Component {
 
     Submit = () => {
-        axios.delete(`http://localhost:8080/api/v1/admin/task/${this.props.id}`,
+        axios.delete(`http://localhost:8080/api/v1/admin/user/delete/${this.props.id}`,
         { headers: { Authorization: sessionStorage.getItem('token') } }
         )
             .then(res => {
-                this.props.history.push(`/tasks`);
+                this.props.history.push(`/users`);
             })
             .catch(function (error) {
                 if (error.status==="undefined" && !isUserLoggedIn){
@@ -29,17 +27,15 @@ class Card extends Component {
 
     render() {
         return (
-            <tr key={this.props.id}>
+            <tr  key={this.props.id} >
                 <th scope="row">{this.props.id}</th>
                 <td>{this.props.name}</td>
-                <td>{this.props.priority}</td>
-                <td>{this.props.description}</td>
-                <td>{this.props.date}</td>
-                <td>{this.props.status}</td>
+                <td>{this.props.firstName}</td>
+                <td>{this.props.lastName}</td>
+                <td>{this.props.email}</td>
+                <td>{this.props.data}</td>
                 <td>
-                    <Link className="btn btn-sm btn-outline-info" to={`/task/edit/${this.props.id}`}>Edit Task</Link>
-
-                    {isAdminLoggedIn && <button className="btn btn-sm btn-outline-danger" onClick={this.Submit}>DELETE</button>}
+                {isAdminLoggedIn && <button className="btn btn-sm btn-outline-danger" onClick={this.Submit}>DELETE</button>}
                 </td>
             </tr>
         );

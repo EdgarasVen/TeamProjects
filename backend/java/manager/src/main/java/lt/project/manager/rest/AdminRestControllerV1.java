@@ -3,6 +3,7 @@ package lt.project.manager.rest;
 import lt.project.manager.dto.AdminUserDto;
 import lt.project.manager.dto.TransferProject;
 import lt.project.manager.dto.TransferTask;
+import lt.project.manager.dto.UserDto;
 import lt.project.manager.model.Project;
 import lt.project.manager.model.User;
 import lt.project.manager.service.ServiceRepository;
@@ -36,7 +37,23 @@ public class AdminRestControllerV1 {
         this.userService = userService;
     }
 
-    @GetMapping(value = "users/{id}")
+    @PostMapping(value = "user/create")
+    public void createUser(@RequestBody final UserDto user){
+        userService.register(user.toUser(),"ROLE_USER");
+    }
+
+    @DeleteMapping(value = "user/delete/{id}")
+    public void deleteUser(@PathVariable Long id){
+        if(id==0) throw new IllegalArgumentException();
+        userService.delete(id);
+    }
+
+    @GetMapping(value = "users")
+    public List<User> getAllUsers(){
+        return userService.getAll();
+    }
+
+    @GetMapping(value = "user/{id}")
     public ResponseEntity<AdminUserDto> getUserById(@PathVariable(name = "id") Long id) {
         User user = userService.findById(id);
         if (user == null) {
